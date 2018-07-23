@@ -3,32 +3,41 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    main: './src/index.js',
+    main: [
+      'react-hot-loader/patch',
+      'babel-polyfill',
+      `${__dirname}/src/index.jsx`,
+    ],
   },
   output: {
     filename: '[name].js',
-    path: __dirname + '/dist'
+    path: `${__dirname}/dist`,
   },
 
   devtool: 'source-map',
 
+  resolve: {
+    extensions: ['.js', '.json', '.jsx'],
+  },
+
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: [
+          'babel-loader',
+          'eslint-loader',
+        ],
       },
       {
         test: /\.html$/,
         use: [
           {
             loader: 'html-loader',
-            options: { minimize: true }
-          }
-        ]
+            options: { minimize: true },
+          },
+        ],
       },
       {
         test: /\.(css|scss)$/,
@@ -36,27 +45,38 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
-        ]
+        ],
       },
       {
-        test: [/\.woff/, /\.woff2/],
+        test: /\.(woff|woff2)/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          mimetype: 'application/font-woff'
-        }
+          mimetype: 'application/font-woff',
+        },
       },
-      { test: [/\.ttf/, /\.eot/, /\.jpg$/, /\.svg/, /\.gif/], loader: 'file-loader' }
-    ]
+      {
+        test: /\.(ttf|eot|jpg|svg|gif)/,
+        loader: 'file-loader',
+      },
+    ],
   },
+
   plugins: [
-    new HtmlWebPackPlugin({
-      template: './public/index.html',
-      filename: './index.html'
-    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css'
-    })
-  ]
+      chunkFilename: '[id].css',
+    }),
+    new HtmlWebPackPlugin({
+      template: `${__dirname}/public/index.html`,
+      filename: './index.html',
+    }),
+  ],
+
+  devServer: {
+    hot: true,
+    stats: { chunks: false },
+    historyApiFallback: true,
+    contentBase: `${__dirname}/dist`,
+  },
 };
