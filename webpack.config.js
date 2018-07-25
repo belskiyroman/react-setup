@@ -74,9 +74,6 @@ module.exports = {
   ],
 
   devServer: {
-    hot: true,
-    stats: { chunks: false },
-    historyApiFallback: true,
-    contentBase: `${__dirname}/dist`,
+    contentBase: `${__dirname}/public`,
   },
 };
