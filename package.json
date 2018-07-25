@@ -3,11 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "./src/index.js",
+  "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^4.0.0-alpha.1",
+    "@storybook/addon-links": "^4.0.0-alpha.1",
+    "@storybook/addons": "^4.0.0-alpha.1",
+    "@storybook/cli": "^4.0.0-alpha.1",
+    "@storybook/react": "^4.0.0-alpha.1",
     "eslint": "^5.2.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
@@ -28,6 +36,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
+    "babel-runtime": "^6.26.0",
     "css-loader": "^0.28.11",
     "eslint-loader": "^2.1.0",
     "html-loader": "^0.5.5",
