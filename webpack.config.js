@@ -19,6 +19,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: `${__dirname}/dist`,
+    publicPath: '/',
   },
 
   devtool: 'source-map',
@@ -49,7 +50,7 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],
@@ -63,7 +64,15 @@ module.exports = {
         },
       },
       {
-        test: /\.(ttf|eot|jpg|svg|gif|png)/,
+        test: /\.png$/,
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+          mimetype: 'image/png',
+        },
+      },
+      {
+        test: /\.(ttf|eot|jpg|svg|gif)/,
         loader: 'file-loader',
       },
     ],
