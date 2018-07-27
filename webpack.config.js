@@ -43,7 +43,9 @@ module.exports = {
         use: [
           {
             loader: 'html-loader',
-            options: { minimize: true },
+            options: {
+              minimize: process.env.NODE_ENV === 'production',
+            },
           },
         ],
       },
