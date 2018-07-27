@@ -1,0 +1,18 @@
+.ui.dropdown {
+  background: #F8F9F9;
+  border: none;
+}
+
+.ui.default.dropdown:not(.button) > .text,
+.ui.dropdown:not(.button) > .default.text {
+  color: #B9C3C6;
+}
+
+.ui.dropdown .menu>.item:hover {
+  background: #F3F3F3;
+}
+
+.ui.dropdown .menu .selected.item,
+.ui.dropdown.selected {
+    font-weight: bolder;
+}

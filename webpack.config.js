@@ -8,6 +8,13 @@ module.exports = {
       'babel-polyfill',
       `${__dirname}/src/index.jsx`,
     ],
+    'styles-libs': [
+      'normalize.css',
+      'semantic-ui-css/semantic.min.css',
+    ],
+    styles: [
+      `${__dirname}/src/styles/main.scss`,
+    ],
   },
   output: {
     filename: '[name].js',
@@ -56,7 +63,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(ttf|eot|jpg|svg|gif)/,
+        test: /\.(ttf|eot|jpg|svg|gif|png)/,
         loader: 'file-loader',
       },
     ],
@@ -64,7 +71,7 @@ module.exports = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].[hash].css',
       chunkFilename: '[id].css',
     }),
     new HtmlWebPackPlugin({
