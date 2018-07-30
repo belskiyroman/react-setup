@@ -9,8 +9,9 @@ module.exports = {
       `${__dirname}/src/index.jsx`,
     ],
     'styles-libs': [
-      'normalize.css',
-      'semantic-ui-css/semantic.min.css',
+      // 'normalize.css',
+      // 'semantic-ui-css/semantic.min.css',
+      './semantic/dist/semantic.css',
     ],
     styles: [
       `${__dirname}/src/styles/main.scss`,
