@@ -45,13 +45,13 @@ const data = [
 storiesOf('Form', module)
   .add('Select', () => (
     <div style={{ padding: '20px' }}>
-      <Dropdown className="cs" icon="chevron down" placeholder="Select your country" selection options={data} />
-      <Form.Select className="cs" icon="chevron down" placeholder="Select your country" options={data} />
-      <Select className="cs" icon="chevron down" placeholder="Select your country" options={data} />
+      <Dropdown className="material" icon="chevron down" placeholder="Select your country" selection options={data} />
+      <Form.Select className="material" icon="chevron down" placeholder="Select your country" options={data} />
+      <Select className="material" icon="chevron down" placeholder="Select your country" options={data} />
     </div>
   ))
   .add('Input', () => (
     <div style={{ padding: '20px' }}>
-      <Input className="cs" />
+      <Input className="material" />
     </div>
   ));

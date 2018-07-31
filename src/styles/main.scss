@@ -1,3 +1,8 @@
+@import './fonts/roboto';
+@import './utils/helpers';
 @import './layouts/general';
-@import './fonts/index';
-@import './components/index';
+@import './layouts/header';
+@import './layouts/content';
+@import './components/select';
+@import './components/input';
+@import './components/checkbox';

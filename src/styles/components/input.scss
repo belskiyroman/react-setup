@@ -1,0 +1,22 @@
+.cs.input {
+  min-height: 0;
+  height: 34px;
+
+  & > input {
+    border-color: #B9C3C6;
+    font-family: 'Roboto';
+
+    &::placeholder {
+      color: #B9C3C6;
+    }
+  }
+
+  .ui.label {
+    background-color: #B9C3C6;
+  }
+
+  .ui.label > .icon {
+    margin: 0;
+    color: white;
+  }
+}
