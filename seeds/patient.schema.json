@@ -1,0 +1,137 @@
+{
+  "type": "array",
+  "uniqueItems": true,
+  "minItems": 100,
+  "maxItems": 100,
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer",
+        "minimum": 10000000
+      },
+      "current_physician_id": 1,
+      "first_name": {
+        "type": "string",
+        "faker": "name.firstName"
+      },
+      "last_name": {
+        "type": "string",
+        "faker": "name.lastName"
+      },
+      "patient_data": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "date_of_birth": {
+                "type": "string",
+                "faker": {
+                  "date.between": ["1920", "2000"]
+                }
+              },
+              "gender": {
+                "type": "string",
+                "pattern": "male|female"
+              },
+              "country": "UK",
+              "phone": {
+                "type": "string",
+                "faker": "phone.phoneNumber"
+              },
+              "disease": "gaucher"
+            },
+            "required": [
+              "date_of_birth",
+              "gender",
+              "country",
+              "phone",
+              "disease"
+            ]
+          }
+        ]
+      },
+      "biomarker_data": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "first_treatment_date": {
+                "type": "string",
+                "faker": "date.past"
+              },
+              "date": {
+                "type": "string",
+                "faker": "date.recent"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 10,
+                "maximum": 200
+              },
+              "previous_value": {
+                "type": "integer",
+                "minimum": 10,
+                "maximum": 200
+              }
+            },
+            "required": [
+              "id",
+              "first_treatment_date",
+              "date",
+              "value",
+              "previous_value"
+            ]
+          }
+        ]
+      },
+      "last_qol_data": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "faker": "date.recent"
+              }
+            },
+            "required": [
+              "date"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "current_physician_id",
+      "first_name",
+      "last_name",
+      "patient_data",
+      "biomarker_data",
+      "last_qol_data"
+    ]
+  }
+}
