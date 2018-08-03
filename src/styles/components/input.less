@@ -1,0 +1,33 @@
+.cs.input {
+  min-height: 0;
+  height: 34px;
+
+  & > input {
+    border-right: none;
+    border-color: #B9C3C6;
+    font-family: 'Roboto';
+
+    &::placeholder {
+      color: #B9C3C6;
+    }
+  }
+
+  &.fill > input,
+  & > input:focus {
+    border-color: #DF293E;
+  }
+
+  &.fill > input + .ui.label,
+  & > input:focus + .ui.label {
+    background-color: #DF293E;
+  }
+
+  .ui.label {
+    background-color: #B9C3C6;
+  }
+
+  .ui.label > .icon {
+    margin: 0;
+    color: white;
+  }
+}

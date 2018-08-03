@@ -1,1 +1,12 @@
-export default {};
+import {
+  PATIENT_LIST_REQUEST,
+  PATIENT_LIST_REQUEST_ERROR,
+  PATIENT_LIST_REQUEST_SUCCESS,
+} from './physician.types';
+
+export {
+  /* physician.types */
+  PATIENT_LIST_REQUEST,
+  PATIENT_LIST_REQUEST_ERROR,
+  PATIENT_LIST_REQUEST_SUCCESS,
+};

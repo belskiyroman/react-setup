@@ -1,0 +1,21 @@
+.cs.ui.checkbox {
+  line-height: 18px;
+
+  label {
+    &:before {
+      height: 18px;
+      width: 18px;
+      border: 1px solid #B9C3C6;
+      border-radius: 3px;
+    }
+  }
+
+  input:checked ~ .box:after,
+  input:checked ~ label:after {
+    color: #70879E;
+    font-weight: 100;
+    font-size: smaller;
+    width: 18px;
+    height: 18px;
+  }
+}

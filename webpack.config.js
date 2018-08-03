@@ -8,13 +8,11 @@ module.exports = {
       'babel-polyfill',
       `${__dirname}/src/index.jsx`,
     ],
-    'styles-libs': [
-      // 'normalize.css',
-      // 'semantic-ui-css/semantic.min.css',
-      './semantic/dist/semantic.css',
+    'semantic-ui': [
+      'semantic-ui-css/semantic.min.css',
     ],
     styles: [
-      `${__dirname}/src/styles/main.scss`,
+      `${__dirname}/src/styles/main.less`,
     ],
   },
   output: {
@@ -36,7 +34,12 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           'babel-loader',
-          'eslint-loader',
+          {
+            loader: 'eslint-loader',
+            options: {
+              fix: true,
+            },
+          },
         ],
       },
       {
@@ -51,11 +54,11 @@ module.exports = {
         ],
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.(css|less)$/,
         use: [
           process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader',
+          'less-loader',
         ],
       },
       {

@@ -1,0 +1,1 @@
+export const PAGINATION_BUTCH_SIZE = 10;
