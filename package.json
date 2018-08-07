@@ -6,14 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "cross-env DEBUG=dev-server,send,finalhandler node dev-server",
-    "start:semantic": "subpkg start",
-    "install:production": "npm install --ignore-scripts",
-    "postinstall": "subpkg install"
+    "start": "cross-env DEBUG=dev-server node dev-server"
   },
-  "subPackages": [
-    "docs/semantic-ui-react"
-  ],
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.0-alpha.1",
     "@storybook/addon-links": "^4.0.0-alpha.1",
@@ -64,11 +58,9 @@
     "moment": "^2.22.2",
     "nodemon": "^1.18.3",
     "prop-types": "^15.6.2",
-    "r": "0.0.5",
     "react": "^16.3.0",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",
-    "react-prism": "^4.3.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
