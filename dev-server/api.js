@@ -1,10 +1,3 @@
-const express = require('express');
-const path = require('path');
-const cors = require('cors');
-
-const app = express();
-const port = process.env.PORT || 3000;
-
 const data = [
   {
     id: 92362385,
@@ -175,20 +168,10 @@ const data = [
       date: '2018-01-27',
     },
   },
-].map((item, index) => {
-  item.id = item.id + index;
-  return item;
-});
+].map((item, index) => ({ ...item, id: item.id + index }));
 
-app.use(cors());
-
-// serve static assets normally
-app.use(express.static(path.join(__dirname, 'dist')));
-
-app.get('/patient-list', (req, res) => {
-  // const data = Array(100).fill(0).map(() => {
-  // });
-  res.send({
+module.exports = (app) => {
+  app.get('/patient-list', (req, res) => res.send({
     resources: data,
     meta: {
       pagination: {
@@ -197,13 +180,7 @@ app.get('/patient-list', (req, res) => {
         offset: 0,
       },
     },
-  });
-});
+  }));
 
-// handle every other route with index.html
-app.get('*', (request, response) => {
-  response.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
-
-app.listen(port);
-console.log(`server started on port http://localhost:${port}`);
+  return app;
+};

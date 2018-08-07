@@ -4,12 +4,6 @@
     "react-hot-loader/babel",
     "transform-class-properties",
     "transform-es2015-destructuring",
-    "transform-object-rest-spread",
-    ["prismjs", {
-      "languages": ["javascript", "css", "markup"],
-      "plugins": ["line-numbers"],
-      "theme": "twilight",
-      "css": true
-    }]
+    "transform-object-rest-spread"
   ]
 }
