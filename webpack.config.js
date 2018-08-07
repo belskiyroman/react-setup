@@ -9,7 +9,7 @@ module.exports = {
       `${__dirname}/src/index.jsx`,
     ],
     'semantic-ui': [
-      'semantic-ui-css/semantic.min.css',
+      'semantic-ui-less/semantic.less',
     ],
     styles: [
       `${__dirname}/src/styles/main.less`,
@@ -25,6 +25,9 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
+    alias: {
+      '../../theme.config': `${__dirname}/src/styles/semantic-ui/theme.config.less`,
+    },
   },
 
   module: {
