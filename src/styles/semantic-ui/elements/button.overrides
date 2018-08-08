@@ -1,0 +1,28 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.buttons .disabled.button,
+.ui.disabled.button,
+.ui.button:disabled,
+.ui.disabled.button:hover,
+.ui.disabled.active.button,
+.ui.buttons .disabled.button.basic,
+.ui.disabled.button.basic,
+.ui.basic.button:disabled,
+.ui.disabled.basic.button:hover,
+.ui.disabled.active.basic.button {
+  cursor: pointer;
+  opacity: @disabledOpacity !important;
+  color: @disabledTextColor !important;
+  background: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  border: 1px solid @disabledBorderColor;
+}
+
+/* Basic Group With Disabled */
+.ui.basic.buttons .ui.disabled.button {
+  border-color: @disabledBorderColor;
+}

@@ -1,3 +1,5 @@
+@import '../base/color';
+
 .grow {
   flex-grow: 1;
 }
@@ -5,13 +7,13 @@
 .warning-text {
   padding: 10px;
   border-radius: 4px;
-  background-color: #fff3d5;
-  color: #B3A682;
+  background-color: @warningBackground;
+  color: @warningTextColor;
   font-size: 13px;
 }
 
 .primary-text {
-  color: #383A3A;
+  color: @grey-200;
   font-size: 14px;
 
   &--big {
@@ -20,7 +22,7 @@
 }
 
 .sub-text {
-  color: #B9C3C6;
+  color: @grey-500;
   font-size: 13px;
 
   &--big {
@@ -34,24 +36,24 @@
   height: 6px;
   margin: 4px;
   border-radius: 100%;
-  background-color: #1565C0;
+  background-color: @blue;
 }
 
 .status-new {
-  color: #FFFFFF;
+  color: white;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.6px;
   line-height: 13px;
   border-radius: 3px;
-  background-color: #1565C0;
+  background-color: @blue;
   text-transform: uppercase;
   padding: 2px 4px;
   margin-right: 4px;
 }
 
 i.icon.status-pending {
-  background-color: #B9C3C6;
+  background-color: @grey-500;
   border-radius: 100%;
   height: 16px;
   color: white;
@@ -61,13 +63,13 @@ i.icon.status-pending {
 }
 
 .biomarker-green {
-  color: #9ACE0D;
+  color: @green;
 }
 
 .biomarker-yellow {
-  color: #FFC21D;
+  color: @yellow;
 }
 
 .biomarker-red {
-  color: #F12042;
+  color: @crimson;
 }

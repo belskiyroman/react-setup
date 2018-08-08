@@ -1,0 +1,38 @@
+@import '../../base/color';
+
+/*******************************
+    User Variable Overrides
+*******************************/
+
+/*--------------
+   Pagination
+---------------*/
+
+@itemTextColor: @grey-blue;
+
+@itemVerticalPadding: 0;
+@itemHorizontalPadding: 0;
+
+@hoverItemBackground: @grey-800;
+@hoverItemTextColor: @grey-500;
+
+@activeItemBackground: @grey-800;
+@activeItemTextColor: @grey-500;
+
+@paginationActiveBackground: @grey-800;
+@paginationActiveTextColor: @grey-500;
+
+@paginationMinWidth: 30px;
+@itemVerticalPadding: 0;
+
+@secondaryHoverItemBackground: @grey-800;
+@secondaryHoverItemColor: @grey-500;
+
+@secondaryActiveItemBackground: @grey-800;
+@secondaryActiveItemColor: @grey-500;
+
+@secondaryActiveHoverItemBackground: @grey-800;;
+@secondaryActiveHoverItemColor: @grey-500;;
+
+@secondaryItemPadding: 0;
+@secondaryItemMargin: 0;

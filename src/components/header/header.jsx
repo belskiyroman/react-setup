@@ -28,8 +28,7 @@ const Header = () => (
       <a className="header__link-item" href="javascript:void(0)">Go to CentoPortal</a>
     </div>
     <Dropdown
-      className="header__dropdown"
-      icon="chevron down"
+      className="header__dropdown selection"
       options={userMenu}
       trigger={(
         <div className="header__user-menu">
@@ -39,8 +38,7 @@ const Header = () => (
       )}
     />
     <Dropdown
-      className="header__dropdown"
-      icon="chevron down"
+      className="header__dropdown selection"
       // options={languagesConfig}
       trigger={languagesConfig[0].content}
     />

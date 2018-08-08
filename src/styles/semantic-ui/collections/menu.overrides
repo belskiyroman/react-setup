@@ -1,0 +1,11 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.pagination.menu .item {
+  display: inline-flex;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  outline: none;
+}

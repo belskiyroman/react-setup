@@ -1,14 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { connectStore } from '../utils';
-import PatientsListPage from '../pages/physician/patients-list/patients-list.container';
+import ReactDOM from 'react-dom';
+import App from './router';
 
-const Router = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={PatientsListPage} />
-    </Switch>
-  </BrowserRouter>
+ReactDOM.render(
+  <App />,
+  document.getElementById('root'),
 );
-
-export default connectStore(Router);

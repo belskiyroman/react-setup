@@ -1,0 +1,60 @@
+@import '../../base/color';
+
+/*******************************
+    User Variable Overrides
+*******************************/
+
+/* common */
+@fontWeight: 400;
+@borderColor: @grey-blue;
+@horizontalMargin: 0;
+@verticalMargin: 0;
+@verticalPadding: 10px;
+@horizontalPadding: 10px;
+
+/* base */
+@background: @grey-blue;
+@textColor: white;
+
+@focusColor: @textColor;
+@focusBackgroundColor: @background;
+@hoverColor: @textColor;
+@hoverBackgroundColor: @background;
+@activeColor: @textColor;
+@activeBackgroundColor: darken(@background, 14);
+@downColor: @activeColor;
+@downBackgroundColor: @activeBackgroundColor;
+
+@basicBackground: transparent;
+@basicTextColor: @grey-blue;
+@basicBorderSize: 1px;
+@basicBoxShadow: 0px 0px 0px 1px @borderColor inset;
+@basicColoredBorderSize: 1px;
+
+@basicHoverBackground: @basicBackground;
+@basicHoverTextColor: @basicTextColor;
+@basicHoverBoxShadow: @basicBoxShadow;
+
+@basicActiveBackground: @basicBackground;
+@basicActiveTextColor: darken(@basicTextColor, 14%);
+@basicActiveBoxShadow: 0px 0px 0px 1px darken(@borderColor, 14%);
+
+@basicDownBackground: @basicActiveBackground;
+@basicDownTextColor: @basicActiveTextColor;
+@basicDownBoxShadow: @basicActiveBoxShadow;
+
+/* base disabled */
+@disabledOpacity: 1;
+@disabledBorderColor: @grey-500;
+@disabledTextColor: @grey-500;
+
+/* red button */
+@red: @crimson;
+@redTextColor: white;
+@redTextShadow: none;
+@coloredBackgroundImage: none;
+@coloredBoxShadow: none;
+@redHover: @crimson;
+@redFocus: @crimson;
+@redDown: 	#B8132E;
+@redActive: #B8132E;

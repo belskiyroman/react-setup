@@ -1,0 +1,37 @@
+@import '../../base/color';
+
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.input {
+  height: 34px;
+}
+
+.ui.input > input::placeholder {
+  color: @grey-500;
+}
+
+.ui.input.bordered.fill > input,
+.ui.input.bordered > input:focus {
+  border-color: @crimson;
+}
+
+.ui.input.fill > input + .ui.label,
+.ui.input > input:focus + .ui.label {
+  background-color: @crimson;
+}
+
+
+.ui.input .ui.label {
+  background-color: @grey-500;
+}
+
+.ui.input .ui.label > .icon {
+  margin: 0;
+  color: white;
+}
+
+.ui.ui[class*="right labeled"].input > input {
+  border-right: none !important;
+}

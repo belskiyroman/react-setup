@@ -1,0 +1,28 @@
+@import '../../base/color';
+
+/*******************************
+        User Overrides
+*******************************/
+.ui.dropdown > i.icon.dropdown {
+  font-family: 'Icons';
+  font-size: 10px;
+  color: @grey-500;
+
+  &:before {
+    content: "\f078" !important;
+  }
+}
+
+.ui.dropdown.material {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+
+.ui.dropdown.material .menu {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}

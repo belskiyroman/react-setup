@@ -1,0 +1,9 @@
+@import '../../base/color';
+
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@borderColor: @grey-500;
+@lineHeight: 1.15;
+@inputHorizontalPadding: 10px;

@@ -18,6 +18,7 @@ class InputBorder extends Component {
     const { value } = this.state;
     const { className = '', fillClass = '', ...rest } = this.props;
     const fillClasses = {
+      bordered: true,
       fill: !!value,
       [fillClass]: !!value,
     };

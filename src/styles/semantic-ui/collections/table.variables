@@ -1,0 +1,17 @@
+@import "../../base/color";
+
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@border: 1px solid @grey-800;
+@rowBorder: @border;
+@selectableBackground: @grey-800;
+
+@headerBackground: @grey-800;
+@headerColor: @grey-500;
+@headerVerticalPadding: 6px;
+@headerVerticalAlign: bottom;
+@headerFontStyle: normal;
+@headerFontWeight: 400;
+@headerBorder: none;

@@ -1,0 +1,73 @@
+@import '../../base/color';
+
+/*******************************
+     User Global Variables
+*******************************/
+
+@pageMinWidth: 100%;
+@pageBackground: white;
+@pageFont: 'Roboto';
+@textColor: @grey-200;
+@headerFont: @pageFont;
+@pageOverflowX: auto;
+
+/*-------------------
+     Breakpoints
+--------------------*/
+
+@mobileBreakpoint            : 2px;
+@tabletBreakpoint            : 2px;
+@computerBreakpoint          : 2px;
+@largeMonitorBreakpoint      : 2px;
+@widescreenMonitorBreakpoint : 2px;
+
+/*-------------------
+       Fonts
+--------------------*/
+
+@importGoogleFonts : true;
+@googleFontName: Roboto;
+@googleFontSizes   : '300,400,500,700,800,900,400italic,700italic';
+
+@bold              : 500;
+@normal            : normal;
+
+/*-------------------
+      Base Sizes
+--------------------*/
+
+@emSize   : 14px;
+@fontSize : 14px;
+
+@absoluteBorderRadius: 4px;
+
+/*-------------------
+    Brand Colors
+--------------------*/
+
+@primaryColor        : @grey-blue;
+
+/*-------------------
+      Paragraph
+--------------------*/
+
+@paragraphMargin     : 0;
+
+/*-------------------
+       Links
+--------------------*/
+
+@linkColor           : @crimson;
+@linkHoverColor      : @crimson;
+@linkHoverUnderline  : none;
+
+/*-------------------
+       Loader
+--------------------*/
+
+@loaderFillColor         : @crimson;
+@loaderLineColor         : @crimson;
+
+/*******************************
+             States
+*******************************/

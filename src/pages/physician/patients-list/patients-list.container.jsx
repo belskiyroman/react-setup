@@ -4,6 +4,21 @@ import { bindActionCreators } from 'redux';
 import { getPatientListAction } from '../../../core/actions/index';
 import PatientsListView from './patients-list.view';
 
+const userData = {
+  id: 1,
+  email: 'vicente@example.org',
+  institution: 'gaucher',
+  profile: {
+    first_name: 'Vicente',
+    last_name: 'Corkery',
+    country: 'Falkland Islands (Malvinas)',
+    city: 'Lake Lorenberg',
+    zip_code: '17162',
+    address: '8382 Christoper Parkways',
+    phone: '(947) 993-3521 3939',
+  },
+};
+
 class PatientsListContainer extends Component {
   componentDidMount() {
     const { getPatientList } = this.props;
@@ -11,7 +26,7 @@ class PatientsListContainer extends Component {
   }
 
   render() {
-    return <PatientsListView {...this.props} />;
+    return <PatientsListView {...this.props} user={userData} />;
   }
 }
 

@@ -1,14 +1,15 @@
 import React from 'react';
 import {
-  Select, Checkbox, Label, Icon, Table, Pagination,
+  Container,
+  Checkbox, Label, Icon, Table, Pagination,
 } from 'semantic-ui-react';
 import {
   BiomarkerInfo, ChangedPhysician, InfoRequest, PatientInfo, QoLInfo,
 } from '../common/index';
-import { InputBorder } from '../../../components/form/index';
-import { TabsRouter } from '../../../components/tabs/index';
-import { Status } from '../../../components/table/index';
-import { Header } from '../../../components/header/index';
+import { InputBorder, SelectMaterial } from '../../../components/form';
+import { TabsRouter } from '../../../components/tabs';
+import { Status } from '../../../components/table';
+import { Header } from '../../../components/header';
 
 const tabs = [
   { title: 'patients', to: '/' },
@@ -49,52 +50,35 @@ const tableSortFields = [
   },
 ];
 
-const userData = {
-  id: 1,
-  email: 'vicente@example.org',
-  institution: 'gaucher',
-  profile: {
-    first_name: 'Vicente',
-    last_name: 'Corkery',
-    country: 'Falkland Islands (Malvinas)',
-    city: 'Lake Lorenberg',
-    zip_code: '17162',
-    address: '8382 Christoper Parkways',
-    phone: '(947) 993-3521 3939',
-  },
-};
-
-
 const PatientsListView = ({
   totalPages,
   currentPage,
   patientList = [],
-  user = userData,
+  user = {},
 }) => (
-  <div className="container">
+  <Container>
     <Header />
     <main className="content">
       <TabsRouter tabs={tabs} />
       <div className="controls">
         <div className="grow">
           <InputBorder
-            className="cs controls__item"
+            className="controls__item"
             fillClass="test"
             placeholder="Search by name or ID"
             label={<Label><Icon name="search" /></Label>}
             labelPosition="right"
           />
-          <Select
-            className="material controls__item"
-            icon="chevron down"
+          <SelectMaterial
+            className="controls__item"
             placeholder="Sort by..."
             options={tableSortFields}
           />
         </div>
-        <Checkbox className="cs" label="Show inactive" />
+        <Checkbox label="Show inactive" />
       </div>
       <div className="table">
-        <Table className="cs" selectable>
+        <Table selectable>
           <Table.Header>
             <Table.Row verticalAlign="bottom">
               <Table.HeaderCell>Name<br />ID</Table.HeaderCell>
@@ -119,7 +103,7 @@ const PatientsListView = ({
             }) => (
               <Table.Row key={id}>
                 <Table.Cell>
-                  <span className="primary-text primary-text--big table__text-hover-red">
+                  <span className="primary-text primary-text--big text-hover-red">
                     {first_name} {last_name}
                   </span>
                   <br />
@@ -127,7 +111,7 @@ const PatientsListView = ({
                   <span className="sub-text">{id}</span>
                 </Table.Cell>
                 {
-                  current_physician_id !== userData.id
+                  current_physician_id !== user.id
                     ? <ChangedPhysician />
                     : (
                       <React.Fragment>
@@ -169,7 +153,7 @@ const PatientsListView = ({
         }
       </div>
     </main>
-  </div>
+  </Container>
 );
 
 export default PatientsListView;

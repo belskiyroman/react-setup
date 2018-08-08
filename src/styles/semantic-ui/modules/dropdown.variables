@@ -1,0 +1,19 @@
+@import '../../base/color';
+
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@selectionMinHeight: 34px;
+
+@selectionItemHorizontalPadding: 10px;
+@selectionVerticalPadding: 9px;
+@selectionHorizontalPadding: 10px;
+@selectionIconDistance: 10px;
+
+@selectionBorderColor: @grey-500;
+@selectionVisibleBorderColor: @grey-500;
+@selectionHoverBorderColor: @grey-500;
+@selectionActiveBorderColor: @grey-500;
+@selectionActiveHoverBorderColor: @grey-500;
+@selectionFocusBorderColor: @grey-500;

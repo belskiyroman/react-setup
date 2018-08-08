@@ -1,0 +1,16 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.ui.table thead th {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.ui.table.selectable tbody tr:hover .text-hover-red {
+  color: @crimson;
+}
+
+.ui.table.selectable tbody tr:hover .text-hover-grey {
+  color: @grey-500;
+}

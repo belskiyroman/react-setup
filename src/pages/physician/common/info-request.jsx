@@ -4,7 +4,7 @@ import { Button, Table } from 'semantic-ui-react';
 
 const InfoRequest = ({ text, ...rest }) => (
   <Table.Cell {...rest}>
-    <Button className="cs" primary>{text}</Button>
+    <Button basic>{text}</Button>
   </Table.Cell>
 );
 

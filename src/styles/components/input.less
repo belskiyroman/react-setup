@@ -1,33 +1,34 @@
-.cs.input {
+@import '../base/color';
+
+.ui.input {
   min-height: 0;
   height: 34px;
+}
+.ui.input > input {
+  border-right: none;
+  border-color: @grey-500;
+  font-family: 'Roboto';
 
-  & > input {
-    border-right: none;
-    border-color: #B9C3C6;
-    font-family: 'Roboto';
-
-    &::placeholder {
-      color: #B9C3C6;
-    }
+  &::placeholder {
+    color: @grey-500;
   }
+}
 
-  &.fill > input,
-  & > input:focus {
-    border-color: #DF293E;
-  }
+.ui.input.bordered.fill > input,
+.ui.input.bordered > input:focus {
+  border-color: @crimson;
+}
 
-  &.fill > input + .ui.label,
-  & > input:focus + .ui.label {
-    background-color: #DF293E;
-  }
+.ui.input.fill > input + .ui.label,
+.ui.input > input:focus + .ui.label {
+  background-color: @crimson;
+}
 
-  .ui.label {
-    background-color: #B9C3C6;
-  }
+.ui.label {
+  background-color: @grey-500;
+}
 
-  .ui.label > .icon {
-    margin: 0;
-    color: white;
-  }
+.ui.label > .icon {
+  margin: 0;
+  color: white;
 }

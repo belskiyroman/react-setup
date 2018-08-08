@@ -26,12 +26,16 @@
   }
 }
 
+
 .header__dropdown.ui.dropdown {
   display: flex;
   align-items: center;
   min-width: 0;
   min-height: 0;
-  padding: 0;
+  height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
   border: none;
   transition: 0s;
 
@@ -45,6 +49,7 @@
 
   & .menu {
     border: none;
+    margin: 0;
     min-width: 100%;
     width: 100%;
     background: white;
@@ -56,11 +61,7 @@
   }
 
   .icon {
-    transition: opacity .1s ease;
-    margin: 0 8px;
     font-size: 10px;
-    cursor: pointer;
-    height: 100%;
   }
 
 }
@@ -81,9 +82,9 @@
 }
 
 .header__language-flag {
-  width: 40px;
-  height: 40px;
-  padding: 8px;
+  margin-right: 8px;
+  height: 24px;
+  width: 24px;
 }
 
 .header__language-abbr {

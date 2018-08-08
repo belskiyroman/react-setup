@@ -1,27 +1,30 @@
+const { NamedModulesPlugin, HotModuleReplacementPlugin } = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: [
+    'hot-reload': [
+      'webpack-hot-middleware/client',
       'react-hot-loader/patch',
-      'babel-polyfill',
-      `${__dirname}/src/index.jsx`,
     ],
-    'semantic-ui': [
-      'semantic-ui-less/semantic.less',
+    app: [
+      'babel-polyfill',
+      `${__dirname}/src/core/index.jsx`,
     ],
     styles: [
       `${__dirname}/src/styles/main.less`,
     ],
   },
+
   output: {
     filename: '[name].js',
     path: `${__dirname}/dist`,
     publicPath: '/',
   },
 
-  devtool: 'source-map',
+  devtool: 'eval-source-map ',
 
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
@@ -88,6 +91,9 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new NamedModulesPlugin(),
+    new HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].css',
@@ -97,6 +103,23 @@ module.exports = {
       filename: './index.html',
     }),
   ],
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
+
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: true,
+  },
 
   devServer: {
     contentBase: `${__dirname}/public`,
