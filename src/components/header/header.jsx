@@ -20,7 +20,7 @@ const languagesConfig = languages.map((item, index) => ({
   content: <LanguageItem {...item} />,
 }));
 
-const Header = () => (
+const Header = ({ user }) => (
   <header className="header">
     <img className="header__logo" src="/centogene-logo.svg" alt="centogene-logo" />
     <div className="header__links">
@@ -32,8 +32,8 @@ const Header = () => (
       options={userMenu}
       trigger={(
         <div className="header__user-menu">
-          <span className="header__user-menu__name">Dr. Nettie Thompson</span>
-          <span className="header__user-menu__info">Royal Free Medical Centre</span>
+          <span className="header__user-menu__name">Dr. {user.first_name} {user.last_name}</span>
+          <span className="header__user-menu__info">{user.institution}</span>
         </div>
       )}
     />

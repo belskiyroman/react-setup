@@ -16,13 +16,18 @@ class InputBorder extends Component {
 
   render() {
     const { value } = this.state;
-    const { className = '', fillClass = '', ...rest } = this.props;
+    const {
+      className = '',
+      fillClass = '',
+      fillIndicator = false,
+      ...rest
+    } = this.props;
     const fillClasses = {
-      bordered: true,
-      fill: !!value,
-      [fillClass]: !!value,
+      'fill-focus': fillIndicator,
+      fill: !!value && fillIndicator,
+      [fillClass]: !!value && fillIndicator,
     };
-    const classes = classNames(className, fillClasses);
+    const classes = classNames(className, 'bordered', fillClasses);
     return <Input {...rest} className={classes} onChange={this.onChange} />;
   }
 }

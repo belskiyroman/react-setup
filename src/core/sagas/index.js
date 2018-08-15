@@ -1,8 +1,9 @@
 import { spawn, all } from 'redux-saga/effects';
-import physicianSaga from './physician.saga';
+
+import physicianRootSaga from './physician';
 
 const sagas = [
-  physicianSaga,
+  physicianRootSaga,
 ];
 
 const rootSaga = function* rootSaga() {

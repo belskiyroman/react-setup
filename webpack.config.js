@@ -5,15 +5,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    'hot-reload': [
-      'webpack-hot-middleware/client',
-      'react-hot-loader/patch',
-    ],
     app: [
+      'webpack-hot-middleware/client?warn=false',
       'babel-polyfill',
-      `${__dirname}/src/core/index.jsx`,
-    ],
-    styles: [
+      `${__dirname}/src/core/index.hot-reload.jsx`,
       `${__dirname}/src/styles/main.less`,
     ],
   },
@@ -122,6 +117,7 @@ module.exports = {
   },
 
   devServer: {
+    hot: true,
     contentBase: `${__dirname}/public`,
   },
 };

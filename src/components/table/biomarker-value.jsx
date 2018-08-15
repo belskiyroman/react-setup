@@ -1,23 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import moment from 'moment';
+import { biomarkerStatus } from '../../utils';
+
+const colorClass = {
+  '-1': 'biomarker-red',
+  0: 'biomarker-yellow',
+  1: 'biomarker-green',
+};
 
 const BiomarkerValue = ({
-  value, prevValue, biomarkerDate, firstTreatmentDate, children,
+  value,
+  prevValue,
+  biomarkerDate,
+  firstTreatmentDate,
+  children,
 }) => {
-  const HALF_OF_YEAR = 6;
-  const BOUNDARY_OF_POSITIVE_RESULT = 100;
-  const BOUNDARY_OF_PERMISSIBLE_WORSENED = 20;
-  const isHalfOfYearAgo = moment(biomarkerDate).diff(moment(firstTreatmentDate), 'month') > HALF_OF_YEAR;
-  const isBiomarkerGood = value <= BOUNDARY_OF_POSITIVE_RESULT;
-  const isResultWorsened = value - prevValue >= BOUNDARY_OF_PERMISSIBLE_WORSENED;
-  const classes = classNames({
-    'biomarker-green': isHalfOfYearAgo && isBiomarkerGood && !isResultWorsened,
-    'biomarker-red': isHalfOfYearAgo && (!isBiomarkerGood || isResultWorsened),
-    'biomarker-yellow': !isHalfOfYearAgo,
+  const status = biomarkerStatus({
+    value,
+    prevValue,
+    biomarkerDate,
+    firstTreatmentDate,
   });
-  return <span className={classes}>{children}</span>;
+  return <span className={colorClass[status]}>{children}</span>;
 };
 
 BiomarkerValue.propTypes = {

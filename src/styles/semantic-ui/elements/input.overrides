@@ -12,17 +12,6 @@
   color: @grey-500;
 }
 
-.ui.input.bordered.fill > input,
-.ui.input.bordered > input:focus {
-  border-color: @crimson;
-}
-
-.ui.input.fill > input + .ui.label,
-.ui.input > input:focus + .ui.label {
-  background-color: @crimson;
-}
-
-
 .ui.input .ui.label {
   background-color: @grey-500;
 }
@@ -34,4 +23,47 @@
 
 .ui.ui[class*="right labeled"].input > input {
   border-right: none !important;
+}
+
+
+/* Fill State */
+
+.ui.input.bordered.fill > input,
+.ui.input.bordered.fill-focus > input:focus {
+  border-color: @crimson;
+}
+
+.ui.input.fill > input + .ui.label,
+.ui.input.fill-focus > input:focus + .ui.label {
+  background-color: @crimson;
+}
+
+/* Material */
+
+.ui.input.material > input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+
+.input.material ~ .placeholder {
+  position: absolute;
+  top: @verticalPadding - @lineHeightOffset;
+  left: @horizontalPadding;
+  text-align: @textAlign;
+  line-height: @lineHeight;
+  color:  @grey-500;
+  background: transparent;
+  transition: .2s;
+  z-index: 1;
+  cursor: text;
+}
+
+.input.material ~ .placeholder.focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(calc(-100% - 2px));
+  font-size: 12px;
 }

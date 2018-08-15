@@ -3,21 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPatientListAction } from '../../../core/actions/index';
 import PatientsListView from './patients-list.view';
-
-const userData = {
-  id: 1,
-  email: 'vicente@example.org',
-  institution: 'gaucher',
-  profile: {
-    first_name: 'Vicente',
-    last_name: 'Corkery',
-    country: 'Falkland Islands (Malvinas)',
-    city: 'Lake Lorenberg',
-    zip_code: '17162',
-    address: '8382 Christoper Parkways',
-    phone: '(947) 993-3521 3939',
-  },
-};
+import { BasePage } from '../../../utils';
 
 class PatientsListContainer extends Component {
   componentDidMount() {
@@ -26,7 +12,7 @@ class PatientsListContainer extends Component {
   }
 
   render() {
-    return <PatientsListView {...this.props} user={userData} />;
+    return <PatientsListView {...this.props} />;
   }
 }
 
@@ -41,4 +27,4 @@ const container = connect(
   }),
 );
 
-export default container(PatientsListContainer);
+export default BasePage(container(PatientsListContainer));

@@ -1,0 +1,13 @@
+@import '../../base/color';
+
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.checkbox input:checked ~ .box:after,
+.ui.checkbox input:checked ~ label:after {
+  content: "\f00c" !important;
+  font-family: 'Icons';
+  font-size: 10px;
+  color: @grey-blue  !important;;
+}

@@ -19,7 +19,7 @@ debug(`Static resource path: ${STATIC_RESOURCE_PATH}`);
 app.use(cors());
 
 app.use(webpackDevMiddleware(compiler, {
-  reload: true,
+  warn: false,
   publicPath: config.output.publicPath,
 }));
 

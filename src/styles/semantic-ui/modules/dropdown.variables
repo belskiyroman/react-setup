@@ -17,3 +17,6 @@
 @selectionActiveBorderColor: @grey-500;
 @selectionActiveHoverBorderColor: @grey-500;
 @selectionFocusBorderColor: @grey-500;
+
+@defaultTextColor: @grey-500;
+@defaultTextFocusColor: @grey-500;

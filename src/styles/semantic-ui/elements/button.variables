@@ -37,7 +37,7 @@
 
 @basicActiveBackground: @basicBackground;
 @basicActiveTextColor: darken(@basicTextColor, 14%);
-@basicActiveBoxShadow: 0px 0px 0px 1px darken(@borderColor, 14%);
+@basicActiveBoxShadow: 0px 0px 0px 1px darken(@borderColor, 14%) inset;
 
 @basicDownBackground: @basicActiveBackground;
 @basicDownTextColor: @basicActiveTextColor;

@@ -1,0 +1,12 @@
+@import '../../base/color';
+
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@checkboxSize: 18px;
+@checkboxBorderRadius: 3px;
+
+@checkboxColor: @grey-blue;
+@checkboxActiveCheckColor: @grey-blue;
+@checkboxPressedColor: @grey-blue;

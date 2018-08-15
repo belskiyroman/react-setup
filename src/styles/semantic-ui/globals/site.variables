@@ -68,6 +68,19 @@
 @loaderFillColor         : @crimson;
 @loaderLineColor         : @crimson;
 
+/*-------------------
+       Header
+--------------------*/
+@headerMargin: 0;
+@headerFontWeight: 500;
+
+/* HTML Headings */
+@h1 : 36px;
+@h2 : 2rem;
+@h3 : 1.75rem;
+@h4 : 20px;
+@h5 : 16px;
+
 /*******************************
              States
 *******************************/

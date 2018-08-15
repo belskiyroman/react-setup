@@ -8,19 +8,17 @@ const QoLDate = ({ date }) => {
   const YESTERDAY = TODAY.clone().subtract(1, 'days');
   const momentDate = moment(date).startOf('day');
 
-  let displayDate;
-
   if (momentDate.isSame(TODAY)) {
-    displayDate = <span>Today<span className="blue-dot" /></span>;
-  } else if (momentDate.isSame(YESTERDAY)) {
-    displayDate = <span>Yesterday<span className="blue-dot" /></span>;
-  } else {
-    const days = moment().diff(momentDate, 'days');
-    displayDate = days <= ONE_WEEK ? `${days}d` : momentDate.format('DD MMM YYYY');
+    return <span>Today<span className="dot bg-blue" /></span>;
+  }
+  if (momentDate.isSame(YESTERDAY)) {
+    return <span>Yesterday<span className="dot bg-blue" /></span>;
   }
 
-
-  return displayDate;
+  const days = moment().diff(momentDate, 'days');
+  return days > ONE_WEEK
+    ? momentDate.format('DD MMM YYYY')
+    : `${days}d`;
 };
 
 QoLDate.propTypes = {

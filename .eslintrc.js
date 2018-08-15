@@ -15,7 +15,9 @@ module.exports = {
   "rules": {
     "react/prop-types": 0,
     "react/jsx-one-expression-per-line": 0,
+    "react/destructuring-assignment": 0,
     "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/label-has-for": 0,
     "no-script-url": 0,
     "no-console": 0,
     "import/no-cycle": 0,

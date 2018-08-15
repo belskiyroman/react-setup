@@ -1,7 +1,13 @@
 import {
   PAGINATION_BUTCH_SIZE,
-} from './common';
+  YELLOW,
+  RED,
+  GREEN,
+} from './common.const';
 
 export {
   PAGINATION_BUTCH_SIZE,
+  YELLOW,
+  RED,
+  GREEN,
 };

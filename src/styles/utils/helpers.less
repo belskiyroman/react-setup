@@ -1,9 +1,5 @@
 @import '../base/color';
 
-.grow {
-  flex-grow: 1;
-}
-
 .warning-text {
   padding: 10px;
   border-radius: 4px;
@@ -30,13 +26,25 @@
   }
 }
 
-.blue-dot {
+.dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin: 4px;
+  margin: 0 4px;
+  width: 7px;
+  height: 7px;
+  background: black;
   border-radius: 100%;
+}
+
+.bg-blue {
   background-color: @blue;
+}
+
+.bg-red {
+  background-color: @crimson;
+}
+
+.bg-yellow {
+  background-color: @yellow;
 }
 
 .status-new {
@@ -62,6 +70,10 @@ i.icon.status-pending {
   justify-content: center;
 }
 
+.biomarker-blue {
+  color: @blue;
+}
+
 .biomarker-green {
   color: @green;
 }
@@ -72,4 +84,94 @@ i.icon.status-pending {
 
 .biomarker-red {
   color: @crimson;
+}
+
+.material-wrap {
+  display: inline-flex;
+  position: relative;
+}
+
+.come-back {
+  font-size: 13px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.grow-1 {
+  flex-grow: 1;
+}
+
+.grow-2 {
+  flex-grow: 2;
+}
+
+.divider-top {
+  border-top: 1px solid @grey-700;
+}
+
+.divider-bottom {
+  border-bottom: 1px solid @grey-700;
+}
+
+.divider-left {
+  border-left: 1px solid @grey-700;
+}
+
+.divider-right {
+  border-right: 1px solid @grey-700;
+}
+
+.m-t-15 {
+  margin-top: 15px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}
+
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.m-t-50 {
+  margin-top: 50px;
+}
+
+.p-t-15 {
+  padding-top: 15px;
+}
+
+.p-b-30 {
+  padding-bottom: 30px;
+}
+
+.p-t-30 {
+  padding-top: 30px;
+}
+
+.p-r-30 {
+  padding-right: 30px;
+}
+
+.p-l-30 {
+  padding-left: 30px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.weight-500 {
+  font-weight: 500;
 }
