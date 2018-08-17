@@ -2,10 +2,11 @@ import React from 'react';
 import moment from 'moment';
 import { NavLink as Link } from 'react-router-dom';
 import { Icon, Button, Table } from 'semantic-ui-react';
+import { YELLOW, RED, BLUE } from '../../../core/constants';
 import { Pagination } from '../../../components/pagination';
 import { TabsRouter } from '../../../components/tabs';
 import { BiomarkerValue } from '../../../components/table';
-import { BiomarkersBarChart } from '../../../components/chart';
+import { BiomarkersBarChart, QoLBarChart } from '../../../components/chart';
 import { SelectMaterial } from '../../../components/form';
 import { yearsList } from '../../../utils';
 
@@ -28,16 +29,17 @@ const PatientProfileView = ({
 }) => (
   <div>
     <TabsRouter tabs={tabs} />
+
     <div className="controls">
-      <Link className="come-back" to="/physician">
+      <Link className="come-back" to="/physician/patients">
         <Icon name="arrow left" />
         Back to Patient List
       </Link>
     </div>
     <section className="flex m-t-30">
       <div className="grow-1 divider-right p-t-15 p-b-30 p-r-30">
-        <h1>Scott Mitchell</h1>
-        <span className="sub-text">ID 4676</span>
+        <h1>{profile.first_name} {profile.last_name}</h1>
+        <span className="sub-text">ID {profile.id}</span>
 
         <table className="personal-info">
           <tbody>
@@ -45,13 +47,13 @@ const PatientProfileView = ({
               <td>
                 <div className="info-item">
                   <span className="sub-text">Gender</span>
-                  <span className="primary-text">Male</span>
+                  <span className="primary-text">{profile.gender}</span>
                 </div>
               </td>
               <td>
                 <div className="info-item">
                   <span className="sub-text">Disease</span>
-                  <span className="primary-text">Gaucher</span>
+                  <span className="primary-text">{profile.disease}</span>
                 </div>
               </td>
             </tr>
@@ -59,7 +61,9 @@ const PatientProfileView = ({
               <td colSpan={2}>
                 <div className="info-item">
                   <span className="sub-text">Birth Date</span>
-                  <span className="primary-text">13 Dec 1973</span>
+                  <span className="primary-text">
+                    {moment(profile.date_of_birth).format('DD MMM YYYY')}
+                  </span>
                 </div>
               </td>
             </tr>
@@ -67,13 +71,13 @@ const PatientProfileView = ({
               <td>
                 <div className="info-item">
                   <span className="sub-text">Height</span>
-                  <span className="primary-text">176 cm</span>
+                  <span className="primary-text">{profile.height} {profile.height ? 'cm' : null}</span>
                 </div>
               </td>
               <td>
                 <div className="info-item">
                   <span className="sub-text">Weight</span>
-                  <span className="primary-text">75 kg</span>
+                  <span className="primary-text">{profile.weight} {profile.weight ? 'kg' : null}</span>
                 </div>
               </td>
             </tr>
@@ -81,13 +85,13 @@ const PatientProfileView = ({
               <td>
                 <div className="info-item">
                   <span className="sub-text">Country</span>
-                  <span className="primary-text">UK</span>
+                  <span className="primary-text">{profile.country}</span>
                 </div>
               </td>
               <td>
                 <div className="info-item">
                   <span className="sub-text">City</span>
-                  <span className="primary-text">London</span>
+                  <span className="primary-text">{profile.city}</span>
                 </div>
               </td>
             </tr>
@@ -95,13 +99,13 @@ const PatientProfileView = ({
               <td>
                 <div className="info-item">
                   <span className="sub-text">ZIP Code</span>
-                  <span className="primary-text">32062</span>
+                  <span className="primary-text">{profile.zip_code}</span>
                 </div>
               </td>
               <td>
                 <div className="info-item">
                   <span className="sub-text">Address</span>
-                  <span className="primary-text">584 Marlborough St.</span>
+                  <span className="primary-text">{profile.address}</span>
                 </div>
               </td>
             </tr>
@@ -109,7 +113,7 @@ const PatientProfileView = ({
               <td colSpan={2}>
                 <div className="info-item">
                   <span className="sub-text">Phone</span>
-                  <span className="primary-text">257-360-7867</span>
+                  <span className="primary-text">{profile.phone}</span>
                 </div>
               </td>
             </tr>
@@ -117,7 +121,7 @@ const PatientProfileView = ({
               <td colSpan={2}>
                 <div className="info-item">
                   <span className="sub-text">Email</span>
-                  <a href="mailto:scott.mitchell@altenwerth.info">scott.mitchell@altenwerth.info</a>
+                  <a href={profile.email}>{profile.email}</a>
                 </div>
               </td>
             </tr>
@@ -137,7 +141,7 @@ const PatientProfileView = ({
                   value={130.3}
                   prevValue={100}
                   biomarkerDate={new Date().toString()}
-                  firstTreatmentDate={new Date().toString()}
+                  treatmentDate={new Date().toString()}
                 >
                     130.3
                 </BiomarkerValue>
@@ -236,7 +240,7 @@ const PatientProfileView = ({
     </section>
 
     <section className="m-t-50">
-      <h4>Biomarkers</h4>
+      <h4>LysoGb1 Biomarkers</h4>
       <div className="section-border flex m-t-30">
         <div className="chart-box divider-right">
           <div className="align-right p-b-30">
@@ -247,7 +251,7 @@ const PatientProfileView = ({
               defaultValue={yearsOptions[0].value}
             />
           </div>
-          <BiomarkersBarChart />
+          <BiomarkersBarChart data={biomarkers} />
         </div>
 
         <Table className="biomarker-table" textAlign="center" selectable>
@@ -313,6 +317,45 @@ const PatientProfileView = ({
 
     <section className="m-t-50 ">
       <h4>Quality of Life</h4>
+      <div className="section-border flex m-t-30">
+        <div className="chart-box divider-right">
+
+          <div>
+            <div className="qol-chart-header">
+              <div className="qol-chart-name">
+                <img className="icon" src="/heart.svg" alt="heart" />
+                <span>SF-36</span>
+              </div>
+              <span className="qol-chart-max-value">max 100</span>
+            </div>
+            <QoLBarChart color={RED} data={qol} />
+          </div>
+
+          <div>
+            <div className="qol-chart-header">
+              <div className="qol-chart-name">
+                <img className="icon" src="/fire.svg" alt="fire" />
+                <span>Pain</span>
+              </div>
+              <span className="qol-chart-max-value">max 10</span>
+            </div>
+            <QoLBarChart color={YELLOW} data={qol} />
+          </div>
+
+          <div>
+            <div className="qol-chart-header">
+              <div className="qol-chart-name">
+                <img className="icon" src="/flower.svg" alt="flower" />
+                <span>Depression</span>
+              </div>
+              <span className="qol-chart-max-value">max 63</span>
+            </div>
+            <QoLBarChart color={BLUE} data={qol} showTicks />
+          </div>
+
+        </div>
+        <div />
+      </div>
     </section>
   </div>
 );

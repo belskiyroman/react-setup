@@ -11,13 +11,14 @@ function* patientListSaga() {
   while (true) {
     try {
       const { payload = {} } = yield take(PATIENT_LIST_REQUEST);
-      const isLoaded = yield select(state => state.physician.patientList.isLoaded);
-      const { pagination } = yield select(state => state.physician.patientList.meta);
+      const { currentPage, isLoaded } = yield select(state => state.physician.patientList);
 
       if (!isLoaded) {
         const data = yield call(Api.patientList, {
-          offset: payload.offset || pagination.offset,
-          batch_size: PAGINATION_BUTCH_SIZE,
+          filters: {
+            page: payload.page || currentPage,
+            per: PAGINATION_BUTCH_SIZE,
+          },
         });
         yield put(putPatientListAction(data));
       }

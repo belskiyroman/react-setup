@@ -12,14 +12,14 @@ const BiomarkerValue = ({
   value,
   prevValue,
   biomarkerDate,
-  firstTreatmentDate,
+  treatmentDate,
   children,
 }) => {
   const status = biomarkerStatus({
     value,
     prevValue,
     biomarkerDate,
-    firstTreatmentDate,
+    treatmentDate,
   });
   return <span className={colorClass[status]}>{children}</span>;
 };
@@ -28,7 +28,7 @@ BiomarkerValue.propTypes = {
   value: PropTypes.number.isRequired,
   prevValue: PropTypes.number.isRequired,
   biomarkerDate: PropTypes.string.isRequired,
-  firstTreatmentDate: PropTypes.string.isRequired,
+  treatmentDate: PropTypes.string.isRequired,
 };
 
 export default BiomarkerValue;

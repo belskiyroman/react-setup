@@ -9,7 +9,7 @@ class SelectMaterialLabeled extends Component {
   };
 
   componentDidMount() {
-    const { defaultValue } = this.props;
+    const { defaultValue = '' } = this.props;
     this.setState({ value: defaultValue.toString() });
   }
 

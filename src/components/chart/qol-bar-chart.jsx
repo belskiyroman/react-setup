@@ -11,16 +11,8 @@ import {
   CartesianGrid,
   Cell, ReferenceLine,
 } from 'recharts';
-import { YELLOW, RED, GREEN } from '../../core/constants';
-import { biomarkerStatus } from '../../utils';
 
-const color = {
-  '-1': RED,
-  0: YELLOW,
-  1: GREEN,
-};
-
-class BiomarkersBarChart extends React.PureComponent {
+class QoLBarChart extends React.PureComponent {
   constructor(props) {
     super(props);
     this.CHART_WIDTH = 600;
@@ -40,32 +32,41 @@ class BiomarkersBarChart extends React.PureComponent {
   }
 
   render() {
-    const { data } = this.props;
-
+    const {
+      color, showTicks, data = [], onHover = [],
+    } = this.props;
     return (
       <BarChart
         barSize={6}
         width={this.CHART_WIDTH}
-        height={300}
+        height={160}
         data={data}
-        margin={{ bottom: 0, right: 30 }}
+        margin={{ top: 10, left: 30, right: 30 }}
       >
         <XAxis
-          dataKey="key"
+          dataKey={showTicks ? 'key' : 'hideTicks'}
           tickLine={false}
           ticks={[]}
         />
         <YAxis
+          hide
           axisLine={false}
           tickLine={false}
-          ticks={[100]}
+          ticks={[]}
         />
+
         <CartesianGrid strokeDasharray="1 3" />
-        <ReferenceLine y={100} strokeDasharray="1 3" />
         <ReferenceLine y={0} stroke="red" x="0" x1="1" ref={this.xLine} />
-        <Bar dataKey="value" label={{ position: 'top' }}>
+
+        <Bar
+          className="opacity"
+          dataKey="value"
+          label={{ position: 'top' }}
+          onMouseEnter={onHover[0]}
+          onMouseLevel={onHover[1]}
+        >
           {data.map((item, index) => (
-            <Cell fill={color[biomarkerStatus(item)]} key={item.id} />
+            <Cell fill={color} key={item.id} />
           ))}
         </Bar>
       </BarChart>
@@ -73,12 +74,18 @@ class BiomarkersBarChart extends React.PureComponent {
   }
 }
 
-BiomarkersBarChart.propTypes = {
+QoLBarChart.defaultProps = {
+  showTicks: false,
+};
+
+QoLBarChart.propTypes = {
+  showTicks: PropTypes.bool,
+  color: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.any,
-    key: PropTypes.string,
-    value: PropTypes.number,
+    id: PropTypes.any.isRequired,
+    key: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
   })).isRequired,
 };
 
-export default BiomarkersBarChart;
+export default QoLBarChart;

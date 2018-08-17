@@ -3,6 +3,7 @@ import {
   YELLOW,
   RED,
   GREEN,
+  BLUE,
 } from './common.const';
 
 export {
@@ -10,4 +11,5 @@ export {
   YELLOW,
   RED,
   GREEN,
+  BLUE,
 };

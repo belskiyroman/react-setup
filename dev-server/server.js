@@ -29,6 +29,18 @@ app.use(webpackHotMiddleware(compiler));
 app.use(express.static(STATIC_RESOURCE_PATH));
 
 // fake api
-app.use('/api', fakeApiModule(express()));
+app.use(fakeApiModule(express()));
+
+
+app.get('*', (req, res, next) => {
+  const filename = path.join(compiler.outputPath,'index.html');
+  compiler.outputFileSystem.readFile(filename, (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    res.set('content-type','text/html');
+    res.send(result);
+  });
+});
 
 module.exports = app;

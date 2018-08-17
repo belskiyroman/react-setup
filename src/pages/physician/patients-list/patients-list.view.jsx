@@ -1,10 +1,11 @@
 import React from 'react';
+import { NavLink as Link } from 'react-router-dom';
 import {
   Checkbox, Label, Icon, Table,
 } from 'semantic-ui-react';
 import {
   BiomarkerInfo, ChangedPhysician, InfoRequest, PatientInfo, QoLInfo,
-} from '../common/index';
+} from './components/index';
 import { Pagination } from '../../../components/pagination';
 import { InputBorder, SelectMaterial } from '../../../components/form';
 import { TabsRouter } from '../../../components/tabs';
@@ -50,8 +51,8 @@ const tableSortFields = [
 ];
 
 const PatientsListView = ({
-  totalPages,
-  currentPage,
+  totalPages = 1,
+  currentPage = 1,
   patientList = [],
   user = {},
 }) => (
@@ -97,12 +98,16 @@ const PatientsListView = ({
             patient_data,
             biomarker_data,
             last_qol_data,
+            ...rest
           }) => (
             <Table.Row key={id}>
               <Table.Cell>
-                <span className="primary-text primary-text--big text-hover-red">
+                <Link
+                  to={`/physician/patients/${id}`}
+                  className="primary-text primary-text--big text-hover-red"
+                >
                   {first_name} {last_name}
-                </span>
+                </Link>
                 <br />
                 <Status status={status} />
                 <span className="sub-text">{id}</span>
@@ -112,11 +117,7 @@ const PatientsListView = ({
                   ? <ChangedPhysician />
                   : (
                     <React.Fragment>
-                      {
-                        patient_data
-                          ? <PatientInfo {...patient_data} />
-                          : <InfoRequest text="Request Personal Info" colSpan="3" />
-                      }
+                      <PatientInfo {...rest} />
                       {
                         biomarker_data
                           ? <BiomarkerInfo {...biomarker_data} />

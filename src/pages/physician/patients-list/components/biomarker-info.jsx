@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'semantic-ui-react';
 import moment from 'moment';
-import { BiomarkerValue } from '../../../components/table';
+import { BiomarkerValue } from '../../../../components/table';
 
 const BiomarkerInfo = ({
   value,
   previous_value,
   date,
-  first_treatment_date,
+  treatment_date,
 }) => (
   <React.Fragment>
     <Table.Cell className="biomarker-value">
@@ -16,7 +16,7 @@ const BiomarkerInfo = ({
         value={value}
         prevValue={previous_value}
         biomarkerDate={date}
-        firstTreatmentDate={first_treatment_date}
+        treatmentDate={treatment_date}
       >
         {value}
       </BiomarkerValue>
@@ -31,7 +31,7 @@ BiomarkerInfo.propTypes = {
   value: PropTypes.number.isRequired,
   previous_value: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
-  first_treatment_date: PropTypes.string.isRequired,
+  treatment_date: PropTypes.string.isRequired,
 };
 
 export default BiomarkerInfo;

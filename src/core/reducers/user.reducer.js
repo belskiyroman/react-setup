@@ -1,23 +1,27 @@
-// import {  } from '../types/user.types';
+import {
+  USER_LOGIN_REQUEST_SUCCESS,
+  USER_LOGOUT_REQUEST_SUCCESS,
+} from '../types/user.types';
 
 const initialState = {
-  profile: {
-    id: 241,
-    centoportal_id: 'centoportal_id',
-    email: 'ph_test@email.com',
-    first_name: 'Nettie',
-    last_name: 'Thompson',
-    institution: 'Royal Free Medical Centre',
-    country: 'Falkland Islands (Malvinas)',
-    city: 'Lake Lorenberg',
-    zip_code: '17162',
-    address: '8382 Christoper Parkways',
-    phone: '(947) 993-3521 3939',
-  },
+  isLogin: false,
+  profile: {},
 };
 
-const userReducer = (state = initialState, { action, payload }) => {
-  switch (action) {
+const userReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case USER_LOGIN_REQUEST_SUCCESS:
+      return {
+        ...state,
+        isLogin: true,
+        profile: payload.resource,
+      };
+    case USER_LOGOUT_REQUEST_SUCCESS:
+      return {
+        ...state,
+        isLogin: false,
+        profile: {},
+      };
     default: return state;
   }
 };

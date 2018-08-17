@@ -1,14 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connectStore } from '../utils';
-import { PatientListContainer } from '../pages/physician/patients-list';
-import { PatientProfileContainer } from '../pages/physician/patient-profile';
+import Physician from './modules/physician';
+import Staff from './modules/staff';
+import { LoginContainer } from '../pages/physician/login';
 
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/physician" component={PatientListContainer} />
-      <Route exact path="/" component={PatientProfileContainer} />
+      <Route exact path="/" component={LoginContainer} />
+      <Route path="/physician" component={Physician} />
+      <Route path="/staff" component={Staff} />
     </Switch>
   </BrowserRouter>
 );

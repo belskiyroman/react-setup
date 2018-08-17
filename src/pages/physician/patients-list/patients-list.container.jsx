@@ -18,9 +18,10 @@ class PatientsListContainer extends Component {
 
 const container = connect(
   state => ({
-    totalPages: state.physician.totalPages,
-    currentPage: state.physician.currentPage,
-    patientList: state.physician.patientList,
+    user: state.user.profile,
+    totalPages: state.physician.patientList.totalPage,
+    currentPage: state.physician.patientList.currentPage,
+    patientList: state.physician.patientList.data,
   }),
   dispatch => ({
     getPatientList: bindActionCreators(getPatientListAction, dispatch),
