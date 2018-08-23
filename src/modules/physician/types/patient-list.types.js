@@ -1,31 +1,3 @@
-import {
-  take, put, select, call,
-} from 'redux-saga/effects';
-import { PATIENT_LIST_REQUEST } from '../types/index';
-import { putPatientListAction } from '../actions/index';
-import { PAGINATION_BUTCH_SIZE } from '../constants/index';
-import { api } from '../../../utils';
-
-// todo: refactoring
-function* patientListSaga() {
-  while (true) {
-    try {
-      const { payload = {} } = yield take(PATIENT_LIST_REQUEST);
-      const { currentPage, isLoaded } = yield select(state => state.physician.patientList);
-
-      if (!isLoaded) {
-        const { data } = yield call([api, api.patientList], {
-          filters: {
-            page: payload.page || currentPage,
-            per: PAGINATION_BUTCH_SIZE,
-          },
-        });
-        yield put(putPatientListAction(data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-}
-
-export default patientListSaga;
+export const PATIENT_LIST_REQUEST = 'PATIENT_LIST/REQUEST';
+export const PATIENT_LIST_REQUEST_SUCCESS = 'PATIENT_LIST/REQUEST/SUCCESS';
+export const PATIENT_LIST_REQUEST_ERROR = 'PATIENT_LIST/REQUEST/ERROR';

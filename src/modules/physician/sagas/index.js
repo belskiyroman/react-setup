@@ -1,15 +1,21 @@
 import { spawn, all } from 'redux-saga/effects';
 
-import userRootSaga from './user';
-import physicianRootSaga from './physician';
+import userSaga from './user.saga';
+import patientList from './patient-list.saga';
+import patientTreatment from './patient-treatment.saga';
+import patientBiomarker from './patient-biomarker.saga';
+// import patientQol from './patient-qol.saga';
 
 const sagas = [
-  physicianRootSaga,
-  userRootSaga,
+  userSaga,
+  patientList,
+  patientTreatment,
+  patientBiomarker,
+  // patientQol,
 ];
 
-const rootSaga = function* rootSaga() {
+const physicianRootSaga = function* rootSaga() {
   yield all(sagas.map(spawn));
 };
 
-export default rootSaga;
+export default physicianRootSaga;

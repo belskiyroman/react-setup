@@ -1,0 +1,42 @@
+[
+  {
+    "id": 711,
+    "kind": "ERT",
+    "start_date": "2018-07-10",
+    "end_date": null,
+    "drug": "VPRIV",
+    "frequency": "Once a month",
+    "dosage": "15.5 Unit/kg",
+    "current": true
+  },
+  {
+    "id": 712,
+    "kind": "ERT",
+    "start_date": "2018-06-10",
+    "end_date": "2018-07-10",
+    "drug": "Elelyso",
+    "frequency": "Once a month",
+    "dosage": "15.5 Unit/kg",
+    "current": false
+  },
+  {
+    "id": 713,
+    "kind": "SRT",
+    "start_date": "2018-04-10",
+    "end_date": "2018-05-10",
+    "drug": "Celdega",
+    "frequency": "Once a month",
+    "dosage": "15.5 Pill",
+    "current": false
+  },
+  {
+    "id": 714,
+    "kind": "SRT",
+    "start_date": "2018-04-10",
+    "end_date": "2018-05-10",
+    "drug": "Celdega",
+    "frequency": "Once a month",
+    "dosage": "15.5 Pill",
+    "current": false
+  }
+]

@@ -6,9 +6,9 @@ import {
 import {
   BiomarkerInfo, ChangedPhysician, InfoRequest, PatientInfo, QoLInfo,
 } from './components/index';
-import { Pagination } from '../../../components/pagination';
-import { InputBorder, SelectMaterial } from '../../../components/form';
-import { Status } from '../../../components/table';
+import { Pagination } from '../../../../components/pagination';
+import { InputBorder, SelectMaterial } from '../../../../components/form';
+import { Status } from '../../../../components/table';
 
 const tableSortFields = [
   {

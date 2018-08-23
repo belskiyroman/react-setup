@@ -2,12 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import { NavLink as Link } from 'react-router-dom';
 import { Icon, Button, Table } from 'semantic-ui-react';
-import { YELLOW, RED, BLUE } from '../../../core/constants';
-import { Pagination } from '../../../components/pagination';
-import { BiomarkerValue } from '../../../components/table';
-import { BiomarkersBarChart, QoLBarChart } from '../../../components/chart';
-import { SelectMaterial } from '../../../components/form';
-import { yearsList } from '../../../utils';
+import { YELLOW, RED, BLUE } from '../../../../constants';
+import { Pagination } from '../../../../components/pagination';
+import { BiomarkerValue } from '../../../../components/table';
+import { BiomarkersBarChart, QoLBarChart } from '../../../../components/chart';
+import { SelectMaterial } from '../../../../components/form';
+import { yearsList } from '../../../../utils';
 
 const YEAR_AGO = 50;
 const yearsOptions = yearsList(YEAR_AGO)
@@ -129,29 +129,48 @@ const PatientProfileView = ({
 
           <div className="biometric-info grow-1 divider-right patient-info-section p-l-30">
             <h5>Lyso-Gb1</h5>
-            <span className="sub-text">
-              Updated {moment(profile.biomarker_data.date).format('DD MMM YYYY')}
-            </span>
-            <div className="m-t-30">
-              <span className="biomarker-value weight-500">
-                <BiomarkerValue
-                  value={profile.biomarker_data.value}
-                  prevValue={profile.biomarker_data.previous_value}
-                  biomarkerDate={profile.biomarker_data.date}
-                  treatmentDate={profile.biomarker_data.treatment_date}
-                >
-                  {profile.biomarker_data.value}
-                </BiomarkerValue>
-              </span>
-              <span className="biomarker-value">ng/ml</span>
-            </div>
-            <div className="m-t-30">
-              <Button basic>All Biomarkers</Button>
-            </div>
+            {
+              profile.biomarker_data
+                ? (
+                  <React.Fragment>
+                    <span className="sub-text">
+                      Updated {moment(profile.biomarker_data.date).format('DD MMM YYYY')}
+                    </span>
+                    <div className="m-t-30">
+                      <span className="biomarker-value weight-500">
+                        <BiomarkerValue
+                          value={profile.biomarker_data.value}
+                          prevValue={profile.biomarker_data.previous_value}
+                          biomarkerDate={profile.biomarker_data.date}
+                          treatmentDate={profile.biomarker_data.treatment_date}
+                        >
+                          {profile.biomarker_data.value}
+                        </BiomarkerValue>
+                      </span>
+                      <span className="biomarker-value">ng/ml</span>
+                    </div>
+                    <div className="m-t-30">
+                      <Button basic>All Biomarkers</Button>
+                    </div>
+                  </React.Fragment>
+                )
+                : (
+                  <React.Fragment>
+                    <p className="m-t-30">
+                      You don&apos;t have access to bio marker dynamics.
+                      Access is managed directly by Patient.
+                    </p>
+                    <div className="m-t-30">
+                      <Button>Request again</Button>
+                    </div>
+                  </React.Fragment>
+                )
+            }
           </div>
 
           <div className="qol-info patient-info-section p-l-30">
             <h5>QoL Metrics</h5>
+            {}
             <span className="sub-text">Updated Today</span>
             <div className="m-t-30">
               <div className="qol-value">
@@ -182,68 +201,74 @@ const PatientProfileView = ({
           </div>
 
         </div>
-        <div className="current-treatment divider-top patient-info-section p-l-30">
-          <div className="current-treatment-header">
-            <div>
-              <h5>Current Treatment</h5>
-              <span className="color-label color-label-black font-16 m-t-15">
-                {currentTreatment.drug}
-              </span>
+        {
+          profile.biomarker_data
+          && (
+            <div className="current-treatment divider-top patient-info-section p-l-30">
+              <div className="current-treatment-header">
+                <div>
+                  <h5>Current Treatment</h5>
+                  <span className="color-label color-label-black font-16 m-t-15">
+                    {currentTreatment.drug}
+                  </span>
+                </div>
+                <div>
+                  <Button basic>All Treatment Courses</Button>
+                </div>
+              </div>
+
+              <table className="treatment-table m-t-30">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div className="info-item">
+                        <span className="sub-text">Dosage</span>
+                        <span className="primary-text">{currentTreatment.dosage}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="info-item">
+                        <span className="sub-text">Frequency</span>
+                        <span className="primary-text">
+                          {currentTreatment.frequency}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="info-item">
+                        <span className="sub-text">Next Infusion</span>
+                        <span className="primary-text">
+                        ???
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div className="info-item">
+                        <span className="sub-text">Start Date</span>
+                        <span className="primary-text">
+                          {moment(currentTreatment.start_date).format('DD MMM YYYY')}
+                        </span>
+                      </div>
+                    </td>
+                    <td colSpan={2}>
+                      <div className="info-item">
+                        <span className="sub-text">Duration</span>
+                        <span className="primary-text">
+                          {moment(currentTreatment.end_date || Date.now()).diff(moment(currentTreatment.start_date), 'month')}
+
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
             </div>
-            <div>
-              <Button basic>All Treatment Courses</Button>
-            </div>
-          </div>
+          )
+        }
 
-          <table className="treatment-table m-t-30">
-            <tbody>
-              <tr>
-                <td>
-                  <div className="info-item">
-                    <span className="sub-text">Dosage</span>
-                    <span className="primary-text">{currentTreatment.dosage}</span>
-                  </div>
-                </td>
-                <td>
-                  <div className="info-item">
-                    <span className="sub-text">Frequency</span>
-                    <span className="primary-text">
-                      {currentTreatment.frequency}
-                    </span>
-                  </div>
-                </td>
-                <td>
-                  <div className="info-item">
-                    <span className="sub-text">Next Infusion</span>
-                    <span className="primary-text">
-                      ???
-                    </span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="info-item">
-                    <span className="sub-text">Start Date</span>
-                    <span className="primary-text">
-                      {moment(currentTreatment.start_date).format('DD MMM YYYY')}
-                    </span>
-                  </div>
-                </td>
-                <td colSpan={2}>
-                  <div className="info-item">
-                    <span className="sub-text">Duration</span>
-                    <span className="primary-text">
-                      {moment(currentTreatment.end_date || Date.now()).diff(moment(currentTreatment.start_date), 'month')}
-
-                    </span>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
       </div>
     </section>
 

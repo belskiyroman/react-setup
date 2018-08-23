@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPatientListAction } from '../../../core/actions/index';
+import { getPatientListAction } from '../../actions/index';
 import PatientsListView from './patients-list.view';
-import { BasePage } from '../../../utils';
 
 class PatientsListContainer extends Component {
   componentDidMount() {
@@ -19,13 +18,13 @@ class PatientsListContainer extends Component {
 const container = connect(
   state => ({
     user: state.user.profile,
-    totalPages: state.physician.patientList.totalPage,
-    currentPage: state.physician.patientList.currentPage,
-    patientList: state.physician.patientList.data,
+    totalPages: state.patientList.totalPage,
+    currentPage: state.patientList.currentPage,
+    patientList: state.patientList.data,
   }),
   dispatch => ({
     getPatientList: bindActionCreators(getPatientListAction, dispatch),
   }),
 );
 
-export default BasePage(container(PatientsListContainer));
+export default container(PatientsListContainer);

@@ -7,9 +7,8 @@ import {
   getPatientBiomarkersAction,
   getPatientTreatmentsAction,
   getPatientQoLAction,
-} from '../../../core/actions';
+} from '../../actions';
 import PatientsProfileView from './patient-profile.view';
-import { BasePage } from '../../../utils';
 
 class PatientsProfileContainer extends Component {
   componentDidMount() {
@@ -28,17 +27,17 @@ class PatientsProfileContainer extends Component {
 
 const container = connect(
   (state, props) => ({
-    profile: state.physician.patientProfile.isLoaded
-      ? state.physician.patientProfile.data
-      : state.physician.patientList.data.find(
+    profile: state.patientProfile.isLoaded
+      ? state.patientProfile.data
+      : state.patientList.data.find(
         item => item.id.toString() === props.match.params.id.toString(),
       ),
-    biomarkers: state.physician.patientBiomarkers.data,
-    currentTreatment: state.physician.patientTreatments.data.find(item => item.current) || {},
-    treatments: state.physician.patientTreatments.data,
-    treatmentsTotalPages: state.physician.patientTreatments.totalPage,
-    treatmentsCurrentPage: state.physician.patientTreatments.currentPage,
-    qol: state.physician.patientQoL.data,
+    biomarkers: state.patientBiomarkers.data,
+    currentTreatment: state.patientTreatments.data.find(item => item.current) || {},
+    treatments: state.patientTreatments.data,
+    treatmentsTotalPages: state.patientTreatments.totalPage,
+    treatmentsCurrentPage: state.patientTreatments.currentPage,
+    qol: state.patientQoL.data,
   }),
   dispatch => ({
     getPatientProfile: bindActionCreators(getPatientProfileAction, dispatch),
@@ -48,4 +47,4 @@ const container = connect(
   }),
 );
 
-export default BasePage(withRouter(container(PatientsProfileContainer)));
+export default withRouter(container(PatientsProfileContainer));

@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { UNAUTHORIZED, API_BASE_URL } from '../../../constants';
+import { LOGIN_ROUTE } from '../constants';
+import { TokenStorage } from '../../../utils';
 
-class Api {
-  static storage = localStorage;
-
-  static addTokenToRequest(data, headers) {
-    const bearerToken = this.storage.getItem('bearerToken');
+export class Api {
+  addTokenToRequest(data, headers) {
+    const bearerToken = this.tokenStorage.getToken(this.tokenKey);
 
     if (bearerToken) {
       /* eslint-disable-next-line no-param-reassign */
@@ -14,37 +15,48 @@ class Api {
     return JSON.stringify(data);
   }
 
-  static saveTokenFromResponse(data, headers) {
+  saveTokenFromResponse(data, headers) {
     if (headers.authorization) {
-      this.storage.setItem('bearerToken', headers.authorization);
+      this.tokenStorage.setToken(headers.authorization);
     }
 
     return JSON.parse(data);
   }
 
-  static clearToken(data, headers) {
-    this.storage.removeItem('bearerToken');
-  }
-
-  constructor(HTTPdriver) {
+  constructor(HTTPdriver, tokenStorage, tokenKey, locationServise) {
+    this.location = locationServise || window.location;
+    this.tokenKey = tokenKey;
+    this.tokenStorage = tokenStorage;
     this.request = HTTPdriver.create({
-      // baseURL: 'http://localhost:3000',
-      baseURL: 'https://api.mylsd.anadea.co',
+      baseURL: API_BASE_URL,
       withCredentials: true,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       transformRequest: [
-        Api.addTokenToRequest.bind(Api),
+        this.addTokenToRequest.bind(this),
       ],
       transformResponse: [
-        Api.saveTokenFromResponse.bind(Api),
+        this.saveTokenFromResponse.bind(this),
       ],
     });
+
+    this.request.interceptors.response.use(
+      response => response,
+      (error) => {
+        if (error.response.status === UNAUTHORIZED) {
+          this.tokenStorage.removeToken();
+          this.location.replace(LOGIN_ROUTE);
+        }
+
+        return Promise.reject(error);
+      },
+    );
   }
 
   physicianLogin(params) {
+    this.tokenStorage.removeToken();
     return this.request
       .post('/api/v1/physicians/sign_in', params);
   }
@@ -52,7 +64,7 @@ class Api {
   physicianLogout() {
     return this.request
       .delete('/api/v1/physicians/sign_out')
-      .finally(() => Api.saveTokenFromResponse.bind(Api));
+      .finally(() => this.tokenStorage.removeToken());
   }
 
   patientList(params) {
@@ -76,4 +88,7 @@ class Api {
   }
 }
 
-export default new Api(axios);
+const tokenKey = 'physicianToken';
+const tokenStorage = new TokenStorage(localStorage, tokenKey);
+
+export default new Api(axios, tokenStorage, tokenKey);

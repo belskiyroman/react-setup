@@ -1,32 +1,39 @@
 import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import reducers from '../core/reducers/index';
-import sagas from '../core/sagas/index';
+import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import { localStorageMiddleware, reHydrateStore } from './index';
 
-const middlewares = [];
+const composeEnhancers = composeWithDevTools({});
 const sagaMiddleware = createSagaMiddleware();
-
-middlewares.push(sagaMiddleware);
+const middlewares = [sagaMiddleware];
 
 if (process.env.NODE_ENV !== 'production') {
   middlewares.push(createLogger({ collapsed: true }));
 }
 
-const store = createStore(
-  reducers,
-  {},
-  applyMiddleware(...middlewares),
-);
+let store;
+export const getStore = () => store;
 
-const connectStore = Component => () => (
-  <Provider store={store}>
-    <Component />
-  </Provider>
-);
+export default (reducers, sagas, storageKey) => {
+  store = createStore(
+    reducers,
+    reHydrateStore(storageKey),
+    composeEnhancers(applyMiddleware(
+      ...middlewares,
+      localStorageMiddleware(storageKey),
+    )),
+  );
 
-sagaMiddleware.run(sagas);
+  const connectStore = Component => () => (
+    <Provider store={store}>
+      <Component />
+    </Provider>
+  );
 
-export default connectStore;
+  sagaMiddleware.run(sagas);
+
+  return connectStore;
+};

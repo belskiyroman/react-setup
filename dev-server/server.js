@@ -5,14 +5,27 @@ const cors = require('cors');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('../webpack.config');
+const config = require('../webpack/development.webpack.config');
 
 const fakeApiModule = require('./api');
 
 const app = express();
-const compiler = webpack({ ...config, mode: 'development'});
+const compiler = webpack({ ...config, mode: 'development' });
 const { PWD } = process.env;
 const STATIC_RESOURCE_PATH = path.join(PWD, 'public');
+
+const sendEntry = entry => (req, res, next) => {
+  debug(`send entry: ${entry}`);
+
+  const filename = path.join(compiler.outputPath, entry);
+  compiler.outputFileSystem.readFile(filename, (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    res.set('content-type', 'text/html');
+    res.send(result);
+  });
+};
 
 debug(`Static resource path: ${STATIC_RESOURCE_PATH}`);
 
@@ -31,16 +44,9 @@ app.use(express.static(STATIC_RESOURCE_PATH));
 // fake api
 app.use(fakeApiModule(express()));
 
-
-app.get('*', (req, res, next) => {
-  const filename = path.join(compiler.outputPath,'index.html');
-  compiler.outputFileSystem.readFile(filename, (err, result) => {
-    if (err) {
-      return next(err);
-    }
-    res.set('content-type','text/html');
-    res.send(result);
-  });
-});
+app.get('/physician*', sendEntry('physician.html'));
+app.get('/staff*', sendEntry('staff.html'));
+app.get('/admin*', sendEntry('admin.html'));
+app.get('*', sendEntry('physician.html'));
 
 module.exports = app;

@@ -1,104 +1,58 @@
-const { NamedModulesPlugin } = require('webpack');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const { DllPlugin, ContextReplacementPlugin } = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   context: process.cwd(),
 
   entry: {
-    physician: [
-      'babel-polyfill',
-      './src/modules/physician/index.jsx',
+    dll: [
+      'validate.js',
+      'classnames',
+      'moment',
+      'axios',
+      'redux',
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router-dom',
+      'prop-types',
+      'redux-saga',
+      'recharts',
+      'semantic-ui-react',
     ],
-    'physician-style': './src/styles/modules/physician.less',
-    'common-style': './src/styles/common.less',
   },
 
   output: {
-    filename: '[name].js',
-    path: './dist',
+    filename: '[name]_[hash].js',
+    library: '[name]_[hash]',
+    path: path.join(process.cwd(), 'dist', 'dll'),
     publicPath: '/',
   },
 
-  devtool: false,
-
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
-    alias: {
-      '../../theme.config': `${process.cwd()}/src/styles/semantic-ui/theme.config.less`,
-    },
   },
 
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
         use: ['babel-loader'],
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: { minimize: true },
-          },
-        ],
-      },
-      {
-        test: /\.(css|less)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'less-loader',
-        ],
-      },
-      {
-        test: /\.(woff|woff2)/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'application/font-woff',
-        },
-      },
-      {
-        test: /\.png$/,
-        loader: 'url-loader',
-        options: {
-          limit: 100000,
-          mimetype: 'image/png',
-        },
-      },
-      {
-        test: /\.(ttf|eot|jpg|svg|gif)/,
-        loader: 'file-loader',
       },
     ],
   },
 
   plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new NamedModulesPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].css',
-    }),
-    new HtmlWebPackPlugin({
-      template: `${process.cwd()}/public/index.html`,
-      filename: './index.html',
+    new CleanWebpackPlugin([path.join(process.cwd(), 'dist', 'dll')], { root: process.cwd() }),
+    new ContextReplacementPlugin(/moment[/\\]locale$/, /en|uk/),
+    new DllPlugin({
+      path: path.join(process.cwd(), 'dist', 'dll', '[name]-manifest.json'),
+      name: '[name]_[hash]',
     }),
   ],
 
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
-    },
+  stats: {
+    warnings: false,
   },
 };

@@ -1,6 +1,6 @@
 import { getDeepObjectValue } from 'validate.js';
 import { getStore } from './index';
 
-const isAuth = () => getDeepObjectValue(getStore().getState(), 'user.isLogin');
+const getFromStore = keyPath => getDeepObjectValue(getStore().getState(), keyPath);
 
-export default isAuth;
+export default getFromStore;

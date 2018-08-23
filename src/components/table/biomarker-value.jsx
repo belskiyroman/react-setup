@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { biomarkerStatus } from '../../../../utils/index';
+import { biomarkerStatus } from '../../utils/index';
 
 const colorClass = {
   '-1': 'biomarker-red',

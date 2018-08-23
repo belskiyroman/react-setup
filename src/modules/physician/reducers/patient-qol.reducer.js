@@ -1,7 +1,6 @@
-import { PATIENT_QOL_REQUEST_SUCCESS } from '../../types';
+import { PATIENT_QOL_REQUEST_SUCCESS } from '../types/index';
 
 const initialState = {
-  isLoaded: false,
   currentPage: 1,
   totalPage: 1,
   data: [],
@@ -16,7 +15,6 @@ const patientQoLReducer = (state = initialState, { type, payload }) => {
         ...state,
         currentPage,
         totalPage: Math.ceil(total / per_page),
-        isLoaded: true,
         data: resources,
       };
     }

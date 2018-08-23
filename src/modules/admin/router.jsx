@@ -5,19 +5,14 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { connectStore } from '../../../utils';
-import { LoginContainer } from '../../../pages/physician/login';
-import { PatientListContainer } from '../../../pages/physician/patients-list';
-import { PatientProfileContainer } from '../../../pages/physician/patient-profile';
-
+import { connectStore } from '../../utils';
+import { LoginContainer } from './pages/login';
 
 const Physician = () => (
   <BrowserRouter>
     <Switch>
-      <Redirect exact from="/" to="/physician/login" />
-      <Route exact path="/physician/login" component={LoginContainer} />
-      <Route exact path="/physician/patients" component={PatientListContainer} />
-      <Route exact path="/physician/patients/:id" component={PatientProfileContainer} />
+      <Redirect exact from="/" to="/admin/login" />
+      <Route exact path="/admin/login" component={LoginContainer} />
     </Switch>
   </BrowserRouter>
 );

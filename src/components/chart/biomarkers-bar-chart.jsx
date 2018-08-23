@@ -11,8 +11,8 @@ import {
   CartesianGrid,
   Cell, ReferenceLine,
 } from 'recharts';
-import { YELLOW, RED, GREEN } from '../../../../constants/index';
-import { biomarkerStatus } from '../../../../utils/index';
+import { YELLOW, RED, GREEN } from '../../constants/index';
+import { biomarkerStatus } from '../../utils/index';
 
 const color = {
   '-1': RED,

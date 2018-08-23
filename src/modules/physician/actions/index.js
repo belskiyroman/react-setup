@@ -1,4 +1,4 @@
-import {
+export {
   loginAction,
   loginSuccessAction,
   loginErrorAction,
@@ -7,56 +7,28 @@ import {
   logoutSuccessAction,
   logoutErrorAction,
 } from './user.actions';
-import {
-  getPatientListAction,
-  putPatientListAction,
-  errorPatientListAction,
-
-  getPatientProfileAction,
-  putPatientProfileAction,
-  errorPatientProfileAction,
-
-  getPatientBiomarkersAction,
-  putPatientBiomarkersAction,
-  errorPatientBiomarkersAction,
-
-  getPatientTreatmentsAction,
-  putPatientTreatmentsAction,
-  errorPatientTreatmentsAction,
-
-  getPatientQoLAction,
-  putPatientQoLAction,
-  errorPatientQoLAction,
-} from './phisician.actions';
-
 export {
-  /* user.actions */
-  loginAction,
-  loginSuccessAction,
-  loginErrorAction,
-
-  logoutAction,
-  logoutSuccessAction,
-  logoutErrorAction,
-
-  /* phisician.actions */
   getPatientListAction,
   putPatientListAction,
   errorPatientListAction,
-
+} from './patient-list.actions';
+export {
   getPatientProfileAction,
   putPatientProfileAction,
   errorPatientProfileAction,
-
+} from './patient-profile.actions';
+export {
   getPatientBiomarkersAction,
   putPatientBiomarkersAction,
   errorPatientBiomarkersAction,
-
+} from './patient-biomarker.actions';
+export {
   getPatientTreatmentsAction,
   putPatientTreatmentsAction,
   errorPatientTreatmentsAction,
-
+} from './patient-treatment.actions';
+export {
   getPatientQoLAction,
   putPatientQoLAction,
   errorPatientQoLAction,
-};
+} from './patient-qol.actions';

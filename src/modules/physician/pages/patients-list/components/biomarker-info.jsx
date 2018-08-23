@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'semantic-ui-react';
 import moment from 'moment';
-import { BiomarkerValue } from '../../../../components/table';
+import { BiomarkerValue } from '../../../../../components/table';
 
 const BiomarkerInfo = ({
   value,

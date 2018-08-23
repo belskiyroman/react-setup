@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
-import { loginAction } from '../../modules/physician/actions/index';
-import LoginView from './login.view';
+import LoginView from '../../../../pages/login';
+import { loginAction } from '../../actions';
+import { HOME_ROUTE } from '../../constants/routes.const';
 
 class LoginContainer extends Component {
   state = {
@@ -22,7 +23,7 @@ class LoginContainer extends Component {
 
   render() {
     return this.props.isLogin
-      ? <Redirect to="/physician/patients" />
+      ? <Redirect to={HOME_ROUTE} />
       : (
         <LoginView
           {...this.props}

@@ -1,7 +1,6 @@
-import { PATIENT_PROFILE_REQUEST_SUCCESS } from '../../types';
+import { PATIENT_PROFILE_REQUEST_SUCCESS } from '../types/index';
 
 const initialState = {
-  isLoaded: false,
   data: {},
 };
 
@@ -12,7 +11,6 @@ const patientProfileReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         data: resource,
-        isLoaded: true,
       };
     }
     default: return state;
