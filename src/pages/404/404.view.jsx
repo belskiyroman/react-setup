@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NotFoundView = ({ login, handleChange }) => (
+const NotFoundView = () => (
   <h1>404 Page not found.</h1>
 );
 

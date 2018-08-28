@@ -1,7 +1,76 @@
 .login-form {
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 90px auto 0;
+}
+
+.login-button {
+  width: 100px;
 }
 
 .login-form .header {
   border-bottom: none !important;
 }
+
+.help-info {
+  margin-top: 110px;
+}
+
+.help-info-padding {
+  padding: 8px 0;
+}
+
+.login-modal {
+  position: absolute;
+  top: 40%;
+  left: calc(~'50% - 240px');
+  transform: translateY(-50%);
+  width: 480px;
+  padding: 30px 40px;
+  border-radius: 4px;
+  background-color: @grey-800;
+  box-shadow: 0 2px 20px 0 rgba(56,58,58,0.3);
+  z-index: 2;
+}
+
+.login-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-modal .close-button {
+  width: 64px;
+}
+
+.login-modal .target {
+  display: flex;
+}
+
+.login-modal .target-margin {
+  margin-top: 20px;
+}
+
+.login-modal .target-logo {
+  flex-shrink: 0;
+  height: 83px;
+  width: 190px;
+  margin-right: 10px;
+  background: transparent;
+  border: 1px solid @grey-700;
+  border-radius: 4px;
+}
+
+.login-modal .target-logo img {
+  max-height: 40px;
+  max-width: 100%;
+}
+
+.login-modal .target-text {
+  display: flex;
+  align-items: center;
+}
+
+
+

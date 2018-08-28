@@ -50,9 +50,20 @@ SelectMaterialLabeled.propTypes = {
 };
 
 
-const SelectMaterial = props => (props.placeholder
-  ? <SelectMaterialLabeled {...props} />
-  : <Select {...props} className={`material ${props.className}`} />
+const SelectMaterial = props => (
+  props.placeholder
+    ? <SelectMaterialLabeled {...props} />
+    : <Select {...props} className={`material ${props.className}`} />
 );
+
+SelectMaterial.defaultProps = {
+  className: '',
+  placeholder: '',
+};
+
+SelectMaterial.propTypes = {
+  className: PropTypes.string,
+  placeholder: PropTypes.string,
+};
 
 export default SelectMaterial;

@@ -33,7 +33,7 @@ class QoLBarChart extends React.PureComponent {
 
   render() {
     const {
-      color, showTicks, data = [], onHover = [],
+      color = '', showTicks = false, data = [], onHover = [],
     } = this.props;
     return (
       <BarChart
@@ -76,16 +76,17 @@ class QoLBarChart extends React.PureComponent {
 
 QoLBarChart.defaultProps = {
   showTicks: false,
+  onHover: [
+    () => {},
+    () => {},
+  ],
 };
 
 QoLBarChart.propTypes = {
-  showTicks: PropTypes.bool,
   color: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.any.isRequired,
-    key: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
-  })).isRequired,
+  data: PropTypes.array.isRequired,
+  onHover: PropTypes.arrayOf(PropTypes.func),
+  showTicks: PropTypes.bool,
 };
 
 export default QoLBarChart;

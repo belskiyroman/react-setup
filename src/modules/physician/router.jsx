@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   BrowserRouter,
   Redirect,
@@ -10,24 +12,39 @@ import {
   PATIENT_PROFILE_ROUTE,
   LOGIN_ROUTE,
 } from './constants';
-import { connectStore, getFromStore } from '../../utils';
+import { connectStore } from '../../utils';
 import reducers from './reducers';
 import sagas from './sagas';
+import { BasePage } from '../../hoc/base-page';
+import { Header } from './components/header';
 import LoginPage from './pages/login';
 import NotFoundPage from '../../pages/404';
 import PatientListPage from './pages/patients-list';
 import PatientProfilePage from './pages/patient-profile';
 
+
+const authContainer = connect(state => ({ isLogin: state.user.isLogin }));
+
+/* eslint-disable-next-line react/prop-types */
 export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => (
-      getFromStore('user.isLogin')
+    component={authContainer(({ isLogin, ...props }) => (
+      isLogin
         ? <Component {...props} />
-        : <Redirect to={{ pathname: LOGIN_ROUTE, state: { from: props.location } }} />
-    )}
+      /* eslint-disable-next-line no-restricted-globals */
+        : <Redirect to={{ pathname: LOGIN_ROUTE, state: { from: location.pathname } }} />
+    ))}
   />
 );
+
+PrivateRoute.propTypes = {
+  component: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.instanceOf(React.Component),
+    PropTypes.instanceOf(React.PureComponent),
+  ]).isRequired,
+};
 
 const Physician = () => (
   <BrowserRouter>
@@ -36,7 +53,7 @@ const Physician = () => (
       <Route exact path={LOGIN_ROUTE} component={LoginPage} />
       <PrivateRoute exact path={PATIENTS_ROUTE} component={PatientListPage} />
       <PrivateRoute exact path={PATIENT_PROFILE_ROUTE} component={PatientProfilePage} />
-      <Route component={NotFoundPage} />
+      <Route component={BasePage(NotFoundPage, Header)} />
     </Switch>
   </BrowserRouter>
 );

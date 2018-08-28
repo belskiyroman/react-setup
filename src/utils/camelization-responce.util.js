@@ -1,9 +1,9 @@
 const EACH_LETTER_OF_EACH_WORD = /(^|\s|\W|_)+(.)/g;
 const FIRST_LETTER_IN_WORD = /_?(\w)/;
 
+const isObject = data => Object.prototype.toString.call(data) === '[object Object]';
+
 const snakeCaseToCamelCase = str => str
-  .toLowerCase()
-  .trim()
   .split('_')
   .join(' ')
   .toLowerCase()
@@ -17,15 +17,20 @@ const snakeCaseToCamelCase = str => str
     firstCharacter => firstCharacter.toLowerCase(),
   );
 
-const camelizationHash = (data) => {
-  if (Object.prototype.toString.call(data) !== '[object Object]') {
+
+const camelizationResponce = (data) => {
+  if (!isObject(data)) {
     return data;
   }
 
   return Object.keys(data).reduce((acc, key) => {
-    acc[snakeCaseToCamelCase(key)] = camelizationHash(data[key]);
+    if (Array.isArray(data[key])) {
+      acc[snakeCaseToCamelCase(key)] = data[key].map(camelizationResponce);
+    } else {
+      acc[snakeCaseToCamelCase(key)] = camelizationResponce(data[key]);
+    }
     return acc;
   }, {});
 };
 
-export default camelizationHash;
+export default camelizationResponce;

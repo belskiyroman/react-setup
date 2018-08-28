@@ -1,21 +1,20 @@
 import {
-  take, put, select, call,
+  take, put, call,
 } from 'redux-saga/effects';
 import { PATIENT_PROFILE_REQUEST } from '../types/index';
-import { putPatientListAction } from '../actions/index';
+import { requestErrorAction, putPatientProfileAction } from '../actions/index';
 import { api } from '../services';
 
-// todo: refactoring
-function* patientListSaga() {
+function* patientProfileSaga() {
   while (true) {
     try {
       const { payload: id } = yield take(PATIENT_PROFILE_REQUEST);
       const { data } = yield call([api, api.patientProfile], id);
-      yield put(putPatientListAction(data));
+      yield put(putPatientProfileAction(data));
     } catch (error) {
-      console.log(error);
+      yield put(requestErrorAction(error, PATIENT_PROFILE_REQUEST));
     }
   }
 }
 
-export default patientListSaga;
+export default patientProfileSaga;

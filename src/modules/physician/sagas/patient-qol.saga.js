@@ -2,7 +2,7 @@ import {
   take, put, select, call,
 } from 'redux-saga/effects';
 import { PATIENT_QOL_REQUEST } from '../types/index';
-import { putPatientQoLAction } from '../actions/index';
+import { requestErrorAction, putPatientQoLAction } from '../actions/index';
 import { api } from '../services';
 
 function* patientQoLSaga() {
@@ -12,7 +12,7 @@ function* patientQoLSaga() {
       const { data } = yield call([api, api.patientQoL], id);
       yield put(putPatientQoLAction(data));
     } catch (error) {
-      console.log(error);
+      yield put(requestErrorAction(error, PATIENT_QOL_REQUEST));
     }
   }
 }

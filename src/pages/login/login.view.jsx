@@ -1,51 +1,51 @@
 import React from 'react';
-import {
-  Button, Form, Grid, Header, Image, Message, Segment,
-} from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react';
+import { InputMaterial } from '../../components/form';
 
-const LoginView = ({ login, handleChange }) => (
+const LoginView = ({ onLogin, onChange, loginError = false }) => (
   <div className="login-form">
-    <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
-          <Image src="/logo.svg" /> Log-in to your account
-        </Header>
-        <Form size="large">
-          <Segment stacked>
-            <Form.Input
-              fluid
-              name="email"
-              icon="user"
-              iconPosition="left"
-              placeholder="E-mail address"
-              onChange={handleChange}
-            />
-            <Form.Input
-              fluid
-              name="password"
-              icon="lock"
-              iconPosition="left"
-              placeholder="Password"
-              type="password"
-              onChange={handleChange}
-            />
-
-            <Button
-              fluid
-              color="teal"
-              size="large"
-              onClick={login}
-            >
-              Login
-            </Button>
-          </Segment>
-        </Form>
-        <Message>
-          New to us? <a href="#">Sign Up</a>
-        </Message>
-      </Grid.Column>
-    </Grid>
+    <h2>Login to account</h2>
+    <InputMaterial
+      fluid
+      error={loginError}
+      className="m-t-40"
+      name="email"
+      placeholder="Email"
+      onChange={onChange}
+    />
+    <InputMaterial
+      fluid
+      error={loginError}
+      message="Check you email and password"
+      className="m-t-30"
+      name="password"
+      placeholder="Password"
+      type="password"
+      onChange={onChange}
+    />
+    <div className="m-t-40 align-right">
+      <Button className="login-button" color="red" onClick={onLogin}>
+        Login
+      </Button>
+    </div>
+    <div className="help-info">
+      <h5>Need help?</h5>
+      <p className="help-info-padding">Contact our CentoPortal® support team</p>
+      <a href="mailto:support@centoportal.com">support@centoportal.com</a>
+      <p>+49 (0) 0381 / 80113-417</p>
+    </div>
   </div>
 );
+
+LoginView.defaultProps = {
+  loginError: false,
+};
+
+LoginView.propTypes = {
+  loginError: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
+};
 
 export default LoginView;

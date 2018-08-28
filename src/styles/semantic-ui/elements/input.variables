@@ -7,3 +7,6 @@
 @borderColor: @grey-500;
 @lineHeight: 1.15;
 @inputHorizontalPadding: 10px;
+@errorBackground: transparent;
+@errorColor: @grey-200;
+@errorBorder: @yellow;

@@ -75,7 +75,7 @@ class BiomarkersBarChart extends React.PureComponent {
 
 BiomarkersBarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.any,
+    id: PropTypes.number,
     key: PropTypes.string,
     value: PropTypes.number,
   })).isRequired,

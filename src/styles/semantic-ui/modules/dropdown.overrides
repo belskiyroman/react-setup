@@ -55,3 +55,7 @@
   transform: translateY(calc(-100% - 2px));
   font-size: 12px;
 }
+
+.dropdown.material[aria-expanded="true"] ~ .placeholder {
+  color: @crimson;
+}

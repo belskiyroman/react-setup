@@ -1,8 +1,8 @@
-const routeTemplater = (template, config) => {
+const routeTemplate = (template, config) => {
   const replacer = (match, group, key, delimiter = '') => (config[key] || '') + delimiter;
   return template
     .replace(/(:(\w+?))(\/|&)/g, replacer)
     .replace(/(:(\w+?))()$/, replacer);
 };
 
-export default routeTemplater;
+export default routeTemplate;

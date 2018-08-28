@@ -1,9 +1,24 @@
 import axios from 'axios';
 import { UNAUTHORIZED, API_BASE_URL } from '../../../constants';
-import { LOGIN_ROUTE } from '../constants';
-import { TokenStorage } from '../../../utils';
+import { camelizationResponse, TokenStorage } from '../../../utils';
 
 export class Api {
+  static pagination(page = '', per = '') {
+    return `filters[page]=${page}&filters[per]=${per}`;
+  }
+
+  static search(search = '') {
+    return `filters[search]=${search}`;
+  }
+
+  static orderBy(orderAsc = '', orderDesc = '') {
+    return `filters[order_asc]=${orderAsc}&filters[order_desc]=${orderDesc}`;
+  }
+
+  static inactivePatients(inactive) {
+    return inactive ? `inactive=${inactive}` : '';
+  }
+
   addTokenToRequest(data, headers) {
     const bearerToken = this.tokenStorage.getToken(this.tokenKey);
 
@@ -20,7 +35,7 @@ export class Api {
       this.tokenStorage.setToken(headers.authorization);
     }
 
-    return JSON.parse(data);
+    return typeof data === 'string' && data.length ? JSON.parse(data) : data;
   }
 
   constructor(HTTPdriver, tokenStorage, tokenKey, locationServise) {
@@ -28,7 +43,7 @@ export class Api {
     this.tokenKey = tokenKey;
     this.tokenStorage = tokenStorage;
     this.request = HTTPdriver.create({
-      baseURL: API_BASE_URL,
+      baseURL: `${API_BASE_URL}/api/v1`,
       withCredentials: true,
       headers: {
         Accept: 'application/json',
@@ -43,14 +58,16 @@ export class Api {
     });
 
     this.request.interceptors.response.use(
-      response => response,
+      (response) => {
+        response.data = camelizationResponse(response.data);
+        return response;
+      },
       (error) => {
         if (error.response.status === UNAUTHORIZED) {
           this.tokenStorage.removeToken();
-          this.location.replace(LOGIN_ROUTE);
         }
 
-        return Promise.reject(error);
+        return Promise.reject(error.response);
       },
     );
   }
@@ -58,33 +75,56 @@ export class Api {
   physicianLogin(params) {
     this.tokenStorage.removeToken();
     return this.request
-      .post('/api/v1/physicians/sign_in', params);
+      .post('/physicians/sign_in', params);
   }
 
   physicianLogout() {
     return this.request
-      .delete('/api/v1/physicians/sign_out')
-      .finally(() => this.tokenStorage.removeToken());
+      .delete('/physicians/sign_out')
+      .then(() => this.tokenStorage.removeToken());
   }
 
-  patientList(params) {
+  patientList({
+    page,
+    per,
+    search: str,
+    orderAsc,
+    orderDesc,
+    inactive,
+  }) {
+    const {
+      pagination,
+      search,
+      orderBy,
+      inactivePatients,
+    } = Api;
     return this.request
-      .get('/api/v1/physician/patients', params);
+      .get(`/physician/patients?${inactivePatients(inactive)}&${pagination(page, per)}&${search(str)}&${orderBy(orderAsc, orderDesc)}`);
   }
 
   patientProfile(id) {
     return this.request
-      .get(`/api/v1/physician/patients/${id}`);
+      .get(`/physician/patients/${id}`);
   }
 
   patientTreatments(id) {
     return this.request
-      .get(`/api/v1/physician/patients/${id}/treatments`);
+      .get(`/physician/patients/${id}/treatments`);
   }
 
   patientBiomarkers(id) {
     return this.request
-      .get(`/api/v1/physician/patients/${id}/biomarker_results`);
+      .get(`/physician/patients/${id}/biomarker_results`);
+  }
+
+  requestBiomarkersPermission(id) {
+    return this.request
+      .post(`/physician/patients/${id}/permission_request?permission_request[kind]=biomarker_results`);
+  }
+
+  requestQoLPermission(id) {
+    return this.request
+      .post(`/physician/patients/${id}/permission_request?permission_request[kind]=qol`);
   }
 }
 

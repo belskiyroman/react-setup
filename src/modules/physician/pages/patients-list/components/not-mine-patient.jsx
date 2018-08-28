@@ -1,17 +1,15 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
-import InfoRequest from './info-request';
 
-const ChangedPhysician = () => (
+const NotMinePatient = () => (
   <React.Fragment>
-    <Table.Cell colSpan="5">
+    <Table.Cell colSpan="6">
       <span className="warning-text">
         This patient has changes his Physician.
         You have no access to his data anymore
       </span>
     </Table.Cell>
-    <InfoRequest text="Hide" textAlign="right" />
   </React.Fragment>
 );
 
-export default ChangedPhysician;
+export default NotMinePatient;

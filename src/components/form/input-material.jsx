@@ -29,22 +29,28 @@ class InputMaterial extends Component {
 
   render() {
     const { value, focus } = this.state;
-    const { className, placeholder, ...rest } = this.props;
+    const {
+      className, placeholder, message, error, ...rest
+    } = this.props;
 
     const focusClass = classNames({
-      focus: value || focus,
+      error,
+      focus,
+      fill: value,
     });
 
     return (
-      <label className="material-wrap">
+      <label className={`material-wrap ${className}`}>
         <Input
           {...rest}
-          className={`material ${className}`}
+          error={error}
+          className="material"
           onChange={this.onChange}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         />
         <span className={`placeholder ${focusClass}`}>{placeholder}</span>
+        {error && message && <span className="error-text">{message}</span>}
       </label>
     );
   }
@@ -53,11 +59,15 @@ class InputMaterial extends Component {
 
 InputMaterial.defaultProps = {
   placeholder: '',
+  error: false,
+  message: '',
 };
 
 InputMaterial.propTypes = {
   ...Input.propTypes,
   placeholder: PropTypes.string,
+  error: PropTypes.bool,
+  message: PropTypes.string,
 };
 
 export default InputMaterial;

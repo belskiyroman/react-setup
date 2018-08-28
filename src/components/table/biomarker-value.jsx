@@ -25,10 +25,11 @@ const BiomarkerValue = ({
 };
 
 BiomarkerValue.propTypes = {
-  value: PropTypes.number.isRequired,
-  prevValue: PropTypes.number.isRequired,
   biomarkerDate: PropTypes.string.isRequired,
+  prevValue: PropTypes.number.isRequired,
   treatmentDate: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 export default BiomarkerValue;

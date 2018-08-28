@@ -69,7 +69,7 @@
 @loaderLineColor         : @crimson;
 
 /*-------------------
-       Header
+       BaseHeader
 --------------------*/
 @headerMargin: 0;
 @headerFontWeight: 500;

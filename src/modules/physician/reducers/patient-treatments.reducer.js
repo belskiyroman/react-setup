@@ -1,4 +1,7 @@
-import { PATIENT_TREATMENTS_REQUEST_SUCCESS } from '../types/index';
+import {
+  PATIENT_TREATMENTS_REQUEST_SUCCESS,
+  PATIENT_TREATMENTS_REQUEST_FILTERS,
+} from '../types/index';
 
 const initialState = {
   currentPage: 1,
@@ -16,6 +19,12 @@ const patientTreatmentsReducer = (state = initialState, { type, payload }) => {
         currentPage,
         totalPage: Math.ceil(total / per_page),
         data: resources,
+      };
+    }
+    case PATIENT_TREATMENTS_REQUEST_FILTERS: {
+      return {
+        ...state,
+        ...payload,
       };
     }
     default: return state;

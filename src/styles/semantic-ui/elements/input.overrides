@@ -39,6 +39,15 @@
 }
 
 /* Material */
+.material-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.material-wrap .ui.fluid.input {
+  width: 100%;
+}
 
 .ui.input.material > input {
   border-top: none;
@@ -60,10 +69,20 @@
   cursor: text;
 }
 
+.input.material ~ .placeholder.fill,
 .input.material ~ .placeholder.focus {
   position: absolute;
   top: 0;
   left: 0;
   transform: translateY(calc(-100% - 2px));
+  font-size: 12px;
+}
+
+.input.material ~ .placeholder.focus {
+  color: @crimson;
+}
+
+.material-wrap .error-text {
+  color: @yellow;
   font-size: 12px;
 }

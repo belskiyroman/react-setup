@@ -4,3 +4,11 @@ export {
   PATIENT_PROFILE_ROUTE,
   HOME_ROUTE,
 } from './routes.const';
+export {
+  API_LOGIN,
+  API_LOGOUT,
+  API_PATIENTS,
+  API_PATIENT_PROFILE,
+  API_PATIENT_TREATMENTS,
+  API_PATIENT_BIOMARKERS,
+} from './api-routes.const';

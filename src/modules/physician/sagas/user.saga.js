@@ -3,10 +3,10 @@ import {
 } from 'redux-saga/effects';
 import { USER_LOGIN_REQUEST, USER_LOGOUT_REQUEST } from '../types';
 import {
-  loginSuccessAction,
+  requestErrorAction,
   loginErrorAction,
+  loginSuccessAction,
   logoutSuccessAction,
-  logoutErrorAction,
 } from '../actions';
 import { api } from '../services';
 
@@ -23,7 +23,8 @@ function* userLoginSaga() {
         yield put(loginSuccessAction(data));
       }
     } catch (error) {
-      yield put(loginErrorAction(error));
+      yield put(requestErrorAction(error, USER_LOGIN_REQUEST));
+      yield put(loginErrorAction());
     }
   }
 }
@@ -35,7 +36,7 @@ function* userLogoutSaga() {
       yield call([api, api.physicianLogout]);
       yield put(logoutSuccessAction());
     } catch (error) {
-      yield put(logoutErrorAction(error));
+      yield put(requestErrorAction(error, USER_LOGOUT_REQUEST));
     }
   }
 }

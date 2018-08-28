@@ -8,6 +8,10 @@ class InputBorder extends Component {
     value: '',
   };
 
+  componentDidMount() {
+    this.setState({ value: this.props.defaultValue });
+  }
+
   onChange = (e, data) => {
     const { onChange } = this.props;
     if (onChange) onChange(e, data);

@@ -1,7 +1,7 @@
 import {
   PATIENT_TREATMENTS_REQUEST,
   PATIENT_TREATMENTS_REQUEST_SUCCESS,
-  PATIENT_TREATMENTS_REQUEST_ERROR,
+  PATIENT_TREATMENTS_REQUEST_FILTERS,
 } from '../types';
 
 export const getPatientTreatmentsAction = payload => ({
@@ -14,7 +14,7 @@ export const putPatientTreatmentsAction = payload => ({
   type: PATIENT_TREATMENTS_REQUEST_SUCCESS,
 });
 
-export const errorPatientTreatmentsAction = payload => ({
+export const putTreatmentsRequestFiltersAction = payload => ({
   payload,
-  type: PATIENT_TREATMENTS_REQUEST_ERROR,
+  type: PATIENT_TREATMENTS_REQUEST_FILTERS,
 });

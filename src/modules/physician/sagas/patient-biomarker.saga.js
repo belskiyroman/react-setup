@@ -2,7 +2,7 @@ import {
   take, put, call,
 } from 'redux-saga/effects';
 import { PATIENT_BIOMARKERS_REQUEST } from '../types/index';
-import { putPatientBiomarkersAction, errorPatientBiomarkersAction } from '../actions/index';
+import { requestErrorAction, putPatientBiomarkersAction } from '../actions/index';
 import { api } from '../services';
 
 function* patientBiomarkersSaga() {
@@ -12,7 +12,7 @@ function* patientBiomarkersSaga() {
       const { data } = yield call([api, api.patientBiomarkers], id);
       yield put(putPatientBiomarkersAction(data));
     } catch (error) {
-      errorPatientBiomarkersAction(error);
+      yield put(requestErrorAction(error, PATIENT_BIOMARKERS_REQUEST));
     }
   }
 }
